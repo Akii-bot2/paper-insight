@@ -1,84 +1,31 @@
 {
   "articles": [
     {
-      "id": "art-001",
-      "originalTitle": "The Impact of AI-Assisted Decision Making on Human Cognitive Load",
-      "catchyTitle": "AIに頼りすぎると脳が衰える？最新研究が示す意外な真実",
+      "id": "sample-001",
+      "originalTitle": "Sample Article for Demonstration",
+      "catchyTitle": "📌 これはサンプル記事です",
       "summary": {
-        "oneLine": "AI支援の意思決定ツールを多用すると、人間の認知能力に影響が出る可能性",
+        "oneLine": "この記事は Paper Insight の表示確認用サンプルです",
         "threePoints": [
-          "AIツールを常用すると、批判的思考力が15%低下する傾向",
-          "ただし、適度な使用は生産性を40%向上させる",
-          "「考える→確認」の順序を守ることが鍵"
+          "管理ツール（admin.html）から新しい記事を追加できます",
+          "CC BY / CC BY-SA ライセンスの論文を要約して追加してください",
+          "このサンプル記事は削除しても構いません"
         ],
-        "fullSummary": "スタンフォード大学の研究チームが500人を対象に行った実験で、AIアシスタントに完全依存したグループは、3ヶ月後に独立した問題解決能力が15%低下することが判明しました。一方、AIを「確認ツール」として使用したグループは、生産性が40%向上しながらも認知能力を維持。研究者は「まず自分で考え、AIで確認する」という使用順序の重要性を強調しています。"
+        "fullSummary": "Paper Insight は学術論文の要約を分かりやすく届けるWebメディアです。記事を追加するには、管理ツール（admin.html）を使用してJSONを生成し、このファイル（data/articles.json）の articles 配列に追加してください。著作権の問題を避けるため、CC BY または CC BY-SA ライセンスの論文のみを対象にすることをお勧めします。"
       },
-      "readingTime": 45,
+      "readingTime": 30,
       "categories": {
         "standard": [
-          "ai-technology",
-          "human-mind"
+          "ai-technology"
         ],
         "thematic": [
-          "thinking-models",
           "life-hacks"
         ]
       },
       "tags": [
-        "AI",
-        "認知科学",
-        "生産性",
-        "脳"
-      ],
-      "thumbnail": {
-        "type": "gradient",
-        "colors": [
-          "#667eea",
-          "#764ba2"
-        ]
-      },
-      "metadata": {
-        "source": "Nature Human Behaviour",
-        "publishedDate": "2026-01-10",
-        "doi": "10.1038/s41562-026-0123"
-      },
-      "mood": [
-        "thought-provoking",
-        "practical"
-      ],
-      "relatedArticles": [
-        "art-002",
-        "art-005"
-      ]
-    },
-    {
-      "id": "art-002",
-      "originalTitle": "Sleep Architecture and Creative Problem Solving: A Neural Network Perspective",
-      "catchyTitle": "天才のひらめきは「寝る前の5分」で作られていた",
-      "summary": {
-        "oneLine": "眠りに入る直前の「まどろみ状態」が創造性のカギを握る",
-        "threePoints": [
-          "入眠直前のθ波が創造的アイデアの発生に関連",
-          "この状態を意図的に活用したグループは問題解決率が3倍に",
-          "スマホを見ながらの就寝はこの効果を完全に打ち消す"
-        ],
-        "fullSummary": "MIT認知科学研究所の最新研究により、眠りに落ちる直前の「まどろみ」の状態（ハイポナゴジア）が、創造的問題解決に極めて重要であることが明らかになりました。脳がθ波を発している約5分間に、意識的な制約から解放された自由な連想が起こります。この状態を意図的に活用する訓練を受けた被験者は、そうでないグループと比較して創造的課題の解決率が3倍になりました。"
-      },
-      "readingTime": 60,
-      "categories": {
-        "standard": [
-          "human-mind"
-        ],
-        "thematic": [
-          "life-hacks",
-          "thinking-models"
-        ]
-      },
-      "tags": [
-        "睡眠",
-        "創造性",
-        "脳科学",
-        "ライフハック"
+        "サンプル",
+        "デモ",
+        "使い方"
       ],
       "thumbnail": {
         "type": "gradient",
@@ -88,364 +35,14 @@
         ]
       },
       "metadata": {
-        "source": "Science",
-        "publishedDate": "2026-01-08",
-        "doi": "10.1126/science.abc1234"
+        "source": "Paper Insight",
+        "publishedDate": "2026-01-17",
+        "doi": "sample/demo"
       },
       "mood": [
-        "inspiring",
         "practical"
-      ],
-      "relatedArticles": [
-        "art-001",
-        "art-003"
-      ]
-    },
-    {
-      "id": "art-003",
-      "originalTitle": "Microbiome-Derived Metabolites and Their Role in Anxiety Regulation",
-      "catchyTitle": "「腸が不安になる」は科学的に正しかった：腸内細菌とメンタルヘルス",
-      "summary": {
-        "oneLine": "腸内細菌が作る物質が、脳の不安レベルを直接制御している",
-        "threePoints": [
-          "特定の腸内細菌が作るGABA様物質が脳に直接作用",
-          "発酵食品を毎日摂取すると不安スコアが28%減少",
-          "抗生物質の使用が不安障害リスクを一時的に上昇させる可能性"
-        ],
-        "fullSummary": "ハーバード大学医学部の研究チームが、腸内細菌が産生する代謝物質が脳の不安回路に直接影響を与えることを初めて実証しました。特にLactobacillus属の細菌が作り出すGABA様物質が、迷走神経を通じて脳の扁桃体に作用。12週間の臨床試験では、発酵食品を毎日摂取したグループの不安スコアが28%減少しました。"
-      },
-      "readingTime": 50,
-      "categories": {
-        "standard": [
-          "health-medical",
-          "human-mind"
-        ],
-        "thematic": [
-          "life-hacks"
-        ]
-      },
-      "tags": [
-        "腸内細菌",
-        "メンタルヘルス",
-        "不安",
-        "発酵食品"
-      ],
-      "thumbnail": {
-        "type": "gradient",
-        "colors": [
-          "#10B981",
-          "#14B8A6"
-        ]
-      },
-      "metadata": {
-        "source": "Cell",
-        "publishedDate": "2026-01-05",
-        "doi": "10.1016/j.cell.2026.01.002"
-      },
-      "mood": [
-        "practical",
-        "motivating"
-      ],
-      "relatedArticles": [
-        "art-004"
-      ]
-    },
-    {
-      "id": "art-004",
-      "originalTitle": "Large Language Models as Collaborative Research Assistants: A Meta-Analysis",
-      "catchyTitle": "ChatGPTを「共著者」にしていいのか？科学界が出した答え",
-      "summary": {
-        "oneLine": "LLMを研究に活用する際のベストプラクティスが明らかに",
-        "threePoints": [
-          "LLM活用で論文執筆時間が平均35%短縮",
-          "ただし「ブレインストーミング」での使用が最も効果的",
-          "最終チェックは必ず人間が行うべきという国際的合意"
-        ],
-        "fullSummary": "Nature誌が主導した国際メタ分析により、研究におけるLLM活用のガイドラインが策定されました。32カ国2,000件以上の論文を分析した結果、LLMは「初期アイデア出し」と「文章の推敲」において特に有効であることが判明。一方、データ解釈や結論の導出では人間の判断が不可欠とされ、「LLMは協力者、判断者ではない」という原則が確立されました。"
-      },
-      "readingTime": 40,
-      "categories": {
-        "standard": [
-          "ai-technology"
-        ],
-        "thematic": [
-          "applied-ai"
-        ]
-      },
-      "tags": [
-        "AI",
-        "LLM",
-        "ChatGPT",
-        "学術研究"
-      ],
-      "thumbnail": {
-        "type": "gradient",
-        "colors": [
-          "#8B5CF6",
-          "#6366F1"
-        ]
-      },
-      "metadata": {
-        "source": "Nature",
-        "publishedDate": "2026-01-12",
-        "doi": "10.1038/d41586-026-0789"
-      },
-      "mood": [
-        "thought-provoking",
-        "practical"
-      ],
-      "relatedArticles": [
-        "art-001",
-        "art-005"
-      ]
-    },
-    {
-      "id": "art-005",
-      "originalTitle": "Temporal Patterns in Global Economic Resilience: A Network Theory Approach",
-      "catchyTitle": "次の経済危機は○○から始まる？AIが予測する2027年リスク",
-      "summary": {
-        "oneLine": "ネットワーク理論とAIを組み合わせた経済危機予測の新手法が登場",
-        "threePoints": [
-          "従来モデルより6ヶ月早く経済変動を検知可能",
-          "サプライチェーンの「隠れた弱点」を可視化",
-          "個人投資家でも活用可能な簡易指標も提案"
-        ],
-        "fullSummary": "オックスフォード大学とGoogle DeepMindの共同研究により、グローバル経済のリスクをリアルタイムで予測する新しいフレームワークが開発されました。従来の経済モデルでは捉えられなかったサプライチェーン上の「隠れた接続」を分析することで、危機の兆候を平均6ヶ月早く検知。研究チームは一般向けの簡易指標も公開し、誰でもウェブ上で確認できるようにしています。"
-      },
-      "readingTime": 55,
-      "categories": {
-        "standard": [
-          "society-business",
-          "ai-technology"
-        ],
-        "thematic": [
-          "future-trends",
-          "applied-ai"
-        ]
-      },
-      "tags": [
-        "AI",
-        "経済",
-        "投資",
-        "予測",
-        "リスク管理"
-      ],
-      "thumbnail": {
-        "type": "gradient",
-        "colors": [
-          "#3B82F6",
-          "#6366F1"
-        ]
-      },
-      "metadata": {
-        "source": "Journal of Economic Perspectives",
-        "publishedDate": "2026-01-14",
-        "doi": "10.1257/jep.2026.1.045"
-      },
-      "mood": [
-        "thought-provoking"
-      ],
-      "relatedArticles": [
-        "art-004"
-      ]
-    },
-    {
-      "id": "art-006",
-      "originalTitle": "Photosynthetic Efficiency Enhancement Through Quantum Coherence",
-      "catchyTitle": "植物は「量子力学」で光合成している？驚愕の発見",
-      "summary": {
-        "oneLine": "光合成の効率の高さは、量子効果によって説明できることが判明",
-        "threePoints": [
-          "植物の光捕集複合体で量子コヒーレンスを直接観測",
-          "この仕組みを模倣した太陽電池が効率25%向上",
-          "「量子生物学」という新分野の幕開け"
-        ],
-        "fullSummary": "ケンブリッジ大学の研究チームが、植物の光合成において量子コヒーレンスが重要な役割を果たしていることを初めて直接証明しました。光エネルギーが「すべての経路を同時に探索する」量子効果により、ほぼ100%の効率で反応中心に到達。この発見に基づいて設計された新型太陽電池は、従来比25%の効率向上を達成しています。"
-      },
-      "readingTime": 65,
-      "categories": {
-        "standard": [
-          "nature-science"
-        ],
-        "thematic": [
-          "future-trends",
-          "sustainability"
-        ]
-      },
-      "tags": [
-        "量子力学",
-        "光合成",
-        "エネルギー",
-        "科学"
-      ],
-      "thumbnail": {
-        "type": "gradient",
-        "colors": [
-          "#22C55E",
-          "#10B981"
-        ]
-      },
-      "metadata": {
-        "source": "Physical Review Letters",
-        "publishedDate": "2026-01-11",
-        "doi": "10.1103/PhysRevLett.126.148302"
-      },
-      "mood": [
-        "inspiring"
       ],
       "relatedArticles": []
-    },
-    {
-      "id": "art-007",
-      "originalTitle": "Digital Minimalism and Attention Restoration: A Longitudinal Study",
-      "catchyTitle": "1週間スマホを「1日2時間」にしたら起きた驚きの変化",
-      "summary": {
-        "oneLine": "デジタルミニマリズムの実践が注意力と幸福度に与える科学的証拠",
-        "threePoints": [
-          "スマホ使用を2時間に制限すると集中持続時間が47%向上",
-          "SNS通知オフだけでも睡眠の質が改善",
-          "「つながりの質」は減少せず、むしろ向上"
-        ],
-        "fullSummary": "カリフォルニア大学バークレー校が1,200人を対象に1年間追跡した研究で、スマホの使用時間を1日2時間以内に制限したグループに顕著な変化が見られました。集中持続時間が47%向上し、主観的幸福度も23%上昇。興味深いことに、友人との関係の「質」は低下せず、むしろ深い対話の機会が増えたと報告されています。"
-      },
-      "readingTime": 35,
-      "categories": {
-        "standard": [
-          "human-mind"
-        ],
-        "thematic": [
-          "life-hacks",
-          "thinking-models"
-        ]
-      },
-      "tags": [
-        "デジタルミニマリズム",
-        "集中力",
-        "スマホ",
-        "生産性"
-      ],
-      "thumbnail": {
-        "type": "gradient",
-        "colors": [
-          "#F59E0B",
-          "#EC4899"
-        ]
-      },
-      "metadata": {
-        "source": "PNAS",
-        "publishedDate": "2026-01-09",
-        "doi": "10.1073/pnas.2025123456"
-      },
-      "mood": [
-        "motivating",
-        "practical"
-      ],
-      "relatedArticles": [
-        "art-001",
-        "art-002"
-      ]
-    },
-    {
-      "id": "art-008",
-      "originalTitle": "AI-Enhanced Early Detection of Neurodegenerative Diseases",
-      "catchyTitle": "アルツハイマーを「発症10年前」に発見する日本製AI",
-      "summary": {
-        "oneLine": "日本の研究チームが開発したAIが、認知症の超早期発見を可能に",
-        "threePoints": [
-          "スマホで5分間のテストを行うだけで検査可能",
-          "発症10年前の段階で95%の精度で予測",
-          "早期介入により発症を5年遅らせることも可能"
-        ],
-        "fullSummary": "理化学研究所と東京大学の共同チームが、スマートフォンで実施できる簡単な認知テストの結果からアルツハイマー病の発症を10年前に予測できるAIを開発しました。5万人のデータで学習したこのAIは、95%の精度で発症リスクを識別。早期に運動療法や食事介入を開始した場合、発症を平均5年遅らせることができるとされています。"
-      },
-      "readingTime": 50,
-      "categories": {
-        "standard": [
-          "health-medical",
-          "ai-technology"
-        ],
-        "thematic": [
-          "applied-ai"
-        ]
-      },
-      "tags": [
-        "AI",
-        "認知症",
-        "医療",
-        "早期発見",
-        "日本"
-      ],
-      "thumbnail": {
-        "type": "gradient",
-        "colors": [
-          "#EF4444",
-          "#F59E0B"
-        ]
-      },
-      "metadata": {
-        "source": "Lancet Digital Health",
-        "publishedDate": "2026-01-15",
-        "doi": "10.1016/S2589-7500(26)00012-3"
-      },
-      "mood": [
-        "inspiring",
-        "practical"
-      ],
-      "relatedArticles": [
-        "art-003",
-        "art-004"
-      ]
-    },
-    {
-      "id": "art-009",
-      "originalTitle": "Task Switching Costs and Cognitive Performance: A Comprehensive Meta-Analysis",
-      "catchyTitle": "マルチタスクは本当に効率が悪いのか？科学が出した意外な結論",
-      "summary": {
-        "oneLine": "マルチタスクの「効率低下」は最大40%だが、ある条件下では逆効果にならない",
-        "threePoints": [
-          "タスク切り替えのたびに脳は「再起動コスト」を払い、集中力回復に平均23分かかる",
-          "ただし「似た種類のタスク」間の切り替えはコストが80%減少",
-          "音楽を聴きながらの作業は例外的にパフォーマンスが向上するケースも"
-        ],
-        "fullSummary": "ミシガン大学の研究チームが過去20年間の認知科学研究500件以上をメタ分析した結果、マルチタスクの真実が明らかになりました。異なる種類のタスク（例：メール返信と企画書作成）を切り替えると、脳は「認知的再構成」を必要とし、集中力が完全に回復するまで平均23分かかることが判明。一方、同じカテゴリのタスク（例：複数のメール返信）間では切り替えコストが80%減少。さらに興味深いことに、歌詞のない音楽を聴きながらの単純作業では、むしろパフォーマンスが15%向上するという結果も。研究者は「すべてのマルチタスクが悪いわけではない」と結論づけ、効率的なタスク管理のための具体的な指針を提案しています。"
-      },
-      "readingTime": 40,
-      "categories": {
-        "standard": [
-          "human-mind"
-        ],
-        "thematic": [
-          "life-hacks",
-          "thinking-models"
-        ]
-      },
-      "tags": [
-        "生産性",
-        "集中力",
-        "マルチタスク",
-        "脳科学",
-        "仕事術"
-      ],
-      "thumbnail": {
-        "type": "gradient",
-        "colors": [
-          "#6366F1",
-          "#8B5CF6"
-        ]
-      },
-      "metadata": {
-        "source": "Psychological Bulletin",
-        "publishedDate": "2026-01-17",
-        "doi": "10.1037/bul0000412"
-      },
-      "mood": [
-        "practical",
-        "thought-provoking"
-      ],
-      "relatedArticles": [
-        "art-001",
-        "art-007"
-      ]
     }
   ],
   "categories": {
