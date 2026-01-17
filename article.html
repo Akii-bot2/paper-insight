@@ -119,8 +119,9 @@
             font-weight: var(--font-weight-bold);
             line-height: 1.3;
             margin-bottom: var(--spacing-4);
-            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
             letter-spacing: -0.02em;
+            color: #FFFFFF !important;
         }
 
         @media (min-width: 640px) {
@@ -561,9 +562,16 @@
                 // Update page title
                 document.title = `${art.catchyTitle} - Paper Insight`;
 
-                // Header background
+                // Header background - set image if available
                 const header = document.getElementById('articleHeader');
                 header.className = `article-header ${Components.getGradientClass(art.thumbnail)}`;
+
+                // Apply background image if thumbnail is image type
+                if (art.thumbnail && art.thumbnail.type === 'image' && art.thumbnail.url) {
+                    header.style.backgroundImage = `url('${art.thumbnail.url}')`;
+                    header.style.backgroundSize = 'cover';
+                    header.style.backgroundPosition = 'center';
+                }
 
                 // Meta tags
                 const metaContainer = document.getElementById('articleMeta');
