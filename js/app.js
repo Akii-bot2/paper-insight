@@ -29,6 +29,9 @@ const App = {
         this.renderMoodFilters();
         this.renderArticles();
 
+        // Check admin access
+        this.checkAdminAccess();
+
         // Setup event listeners
         this.setupEventListeners();
     },
@@ -104,6 +107,28 @@ const App = {
         const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
 
         icon.textContent = isDark ? '☀️' : '🌙';
+    },
+
+    /**
+     * Check for admin access via URL parameter
+     */
+    checkAdminAccess() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const isAdminParam = urlParams.get('admin') === 'true';
+
+        if (isAdminParam) {
+            sessionStorage.setItem('paperinsight_admin', 'true');
+        }
+
+        if (sessionStorage.getItem('paperinsight_admin') === 'true') {
+            const adminLinks = document.querySelectorAll('.admin-link');
+            adminLinks.forEach(link => {
+                link.style.display = 'block';
+            });
+
+            // Also enable admin-specific controls if any
+            document.documentElement.classList.add('is-admin');
+        }
     },
 
     /**

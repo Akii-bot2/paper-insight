@@ -46,6 +46,11 @@
 
     .navbar__desktop-nav {
         display: flex;
+        /* Kept for compatibility if used elsewhere */
+    }
+
+    .navbar__desktop-menu {
+        display: flex;
     }
 
     .article-card__title {
