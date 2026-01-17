@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Paper Insight - 論文要約詳細ページ">
+    <meta name="theme-color" content="#0D9488">
+
+    <title>記事詳細 - Paper Insight</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/pages.css">
+
+    <style>
+        /* Article Page Specific Styles */
+        .article-header {
+            position: relative;
+            padding: var(--spacing-8) var(--spacing-4);
+            margin-bottom: var(--spacing-6);
+            border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
+            overflow: hidden;
+        }
+
+        .article-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%);
+            z-index: 1;
+        }
+
+        .article-header__content {
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+
+        .article-header__back {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: var(--font-size-sm);
+            margin-bottom: var(--spacing-4);
+            transition: color var(--transition-fast);
+        }
+
+        .article-header__back:hover {
+            color: white;
+        }
+
+        .article-header__meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-2);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .article-header__title {
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            line-height: var(--line-height-tight);
+            margin-bottom: var(--spacing-4);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .article-header__source {
+            font-size: var(--font-size-sm);
+            opacity: 0.8;
+        }
+
+        /* Three Points Section */
+        .three-points {
+            background: var(--color-bg-card);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-6);
+            margin: 0 var(--spacing-4) var(--spacing-6);
+            box-shadow: var(--shadow-md);
+        }
+
+        .three-points__title {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--spacing-4);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+        }
+
+        .three-points__list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-4);
+        }
+
+        .three-points__item {
+            display: flex;
+            gap: var(--spacing-3);
+            align-items: flex-start;
+        }
+
+        .three-points__number {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: var(--radius-full);
+            background: var(--color-primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-bold);
+        }
+
+        .three-points__text {
+            font-size: var(--font-size-base);
+            line-height: var(--line-height-relaxed);
+            color: var(--color-text-primary);
+        }
+
+        /* Full Summary Section */
+        .full-summary {
+            padding: 0 var(--spacing-4);
+            margin-bottom: var(--spacing-8);
+        }
+
+        .full-summary__title {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--spacing-4);
+        }
+
+        .full-summary__content {
+            font-size: var(--font-size-base);
+            line-height: var(--line-height-relaxed);
+            color: var(--color-text-secondary);
+        }
+
+        /* Original Paper Info */
+        .paper-info {
+            background: var(--color-bg-secondary);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-4);
+            margin: 0 var(--spacing-4) var(--spacing-8);
+        }
+
+        .paper-info__title {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text-tertiary);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .paper-info__original {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            line-height: var(--line-height-relaxed);
+        }
+
+        .paper-info__doi {
+            display: inline-block;
+            margin-top: var(--spacing-2);
+            font-size: var(--font-size-xs);
+            color: var(--color-primary);
+        }
+
+        /* Related Articles Section */
+        .related-section {
+            padding: 0 var(--spacing-4);
+            margin-bottom: var(--spacing-8);
+        }
+
+        .related-section__title {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--spacing-4);
+        }
+
+        .related-cards {
+            display: flex;
+            gap: var(--spacing-4);
+            overflow-x: auto;
+            padding-bottom: var(--spacing-2);
+            scrollbar-width: none;
+        }
+
+        .related-cards::-webkit-scrollbar {
+            display: none;
+        }
+
+        .related-cards .article-card {
+            flex-shrink: 0;
+            width: 280px;
+        }
+
+        /* Floating Action Buttons */
+        .fab-container {
+            position: fixed;
+            right: var(--spacing-4);
+            bottom: calc(var(--bottom-nav-height) + var(--spacing-4));
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-3);
+            z-index: var(--z-fixed);
+        }
+
+        .fab {
+            width: 56px;
+            height: 56px;
+            border-radius: var(--radius-full);
+            background: var(--color-bg-card);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all var(--transition-fast);
+        }
+
+        .fab:hover {
+            transform: scale(1.1);
+        }
+
+        .fab--primary {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .fab.active {
+            background: #EF4444;
+            color: white;
+        }
+
+        /* Desktop adjustments */
+        @media (min-width: 768px) {
+            .article-header__title {
+                font-size: var(--font-size-3xl);
+            }
+
+            .fab-container {
+                bottom: var(--spacing-8);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .article-content {
+                max-width: 800px;
+                margin: 0 auto;
+            }
+
+            .article-header {
+                border-radius: var(--radius-2xl);
+                margin: var(--spacing-4);
+            }
+
+            .three-points,
+            .full-summary,
+            .paper-info,
+            .related-section {
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar" role="navigation" aria-label="メインナビゲーション">
+        <a href="/" class="navbar__logo">
+            <span class="navbar__logo-icon">📄</span>
+            <span>Paper Insight</span>
+        </a>
+        <div class="navbar__actions">
+            <button class="navbar__btn theme-toggle" id="themeToggle" aria-label="テーマ切り替え">
+                <span class="theme-toggle__icon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content" style="padding-top: var(--nav-height);">
+        <div class="article-content">
+            <!-- Article Header (dynamic background) -->
+            <header class="article-header gradient-purple-blue" id="articleHeader">
+                <div class="article-header__content">
+                    <a href="/" class="article-header__back">
+                        ← トップに戻る
+                    </a>
+                    <div class="article-header__meta" id="articleMeta">
+                        <!-- Tags populated by JS -->
+                    </div>
+                    <h1 class="article-header__title" id="articleTitle">
+                        読み込み中...
+                    </h1>
+                    <p class="article-header__source" id="articleSource"></p>
+                </div>
+            </header>
+
+            <!-- 3-Point Summary -->
+            <section class="three-points">
+                <h2 class="three-points__title">
+                    <span>💡</span> 3行でわかるポイント
+                </h2>
+                <ol class="three-points__list" id="threePoints">
+                    <!-- Populated by JS -->
+                </ol>
+            </section>
+
+            <!-- Full Summary -->
+            <section class="full-summary">
+                <h2 class="full-summary__title">📖 詳しい解説</h2>
+                <p class="full-summary__content" id="fullSummary">
+                    読み込み中...
+                </p>
+            </section>
+
+            <!-- Original Paper Info -->
+            <section class="paper-info">
+                <h3 class="paper-info__title">📚 元論文情報</h3>
+                <p class="paper-info__original" id="originalTitle"></p>
+                <a class="paper-info__doi" id="paperDoi" href="#" target="_blank" rel="noopener">
+                    DOI: --
+                </a>
+            </section>
+
+            <!-- Related Articles -->
+            <section class="related-section" id="relatedSection" style="display: none;">
+                <h2 class="related-section__title">🔗 関連する記事</h2>
+                <div class="related-cards" id="relatedCards">
+                    <!-- Populated by JS -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="site-footer__links">
+                <a href="privacy.html">プライバシーポリシー</a>
+                <a href="contact.html">お問い合わせ</a>
+                <a href="about.html">運営者情報</a>
+            </div>
+            <p class="site-footer__copyright">© 2026 Paper Insight. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons -->
+    <div class="fab-container">
+        <button class="fab" id="fabShare" aria-label="シェアする">
+            📤
+        </button>
+        <button class="fab" id="fabBookmark" aria-label="あとで読む">
+            🔖
+        </button>
+        <button class="fab fab--primary" id="fabLike" aria-label="いいね">
+            🤍
+        </button>
+    </div>
+
+    <!-- Bottom Navigation (Mobile) -->
+    <nav class="bottom-nav" role="navigation" aria-label="フッターナビゲーション">
+        <a href="/" class="bottom-nav__item">
+            <span class="bottom-nav__icon">🏠</span>
+            <span class="bottom-nav__label">ホーム</span>
+        </a>
+        <a href="/" class="bottom-nav__item">
+            <span class="bottom-nav__icon">🔍</span>
+            <span class="bottom-nav__label">検索</span>
+        </a>
+        <a href="#" class="bottom-nav__item">
+            <span class="bottom-nav__icon">🔖</span>
+            <span class="bottom-nav__label">保存済み</span>
+        </a>
+        <a href="#" class="bottom-nav__item">
+            <span class="bottom-nav__icon">⚙️</span>
+            <span class="bottom-nav__label">設定</span>
+        </a>
+    </nav>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/components.js"></script>
+    <script>
+        /**
+         * Article Detail Page Logic
+         */
+        const ArticlePage = {
+            article: null,
+            bookmarks: new Set(),
+            likes: new Set(),
+
+            async init() {
+                this.loadPreferences();
+                this.initTheme();
+                await DataManager.init();
+
+                const articleId = this.getArticleIdFromUrl();
+                if (!articleId) {
+                    window.location.href = '/';
+                    return;
+                }
+
+                this.article = DataManager.getArticleById(articleId);
+                if (!this.article) {
+                    window.location.href = '/';
+                    return;
+                }
+
+                this.render();
+                this.setupEventListeners();
+            },
+
+            getArticleIdFromUrl() {
+                const params = new URLSearchParams(window.location.search);
+                return params.get('id');
+            },
+
+            loadPreferences() {
+                try {
+                    const bookmarks = localStorage.getItem('paperinsight_bookmarks');
+                    const likes = localStorage.getItem('paperinsight_likes');
+                    if (bookmarks) this.bookmarks = new Set(JSON.parse(bookmarks));
+                    if (likes) this.likes = new Set(JSON.parse(likes));
+                } catch (e) { }
+            },
+
+            savePreferences() {
+                localStorage.setItem('paperinsight_bookmarks', JSON.stringify([...this.bookmarks]));
+                localStorage.setItem('paperinsight_likes', JSON.stringify([...this.likes]));
+            },
+
+            initTheme() {
+                const savedTheme = localStorage.getItem('paperinsight_theme');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+                if (savedTheme) {
+                    document.documentElement.setAttribute('data-theme', savedTheme);
+                } else if (prefersDark) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
+                this.updateThemeIcon();
+            },
+
+            toggleTheme() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('paperinsight_theme', newTheme);
+                this.updateThemeIcon();
+            },
+
+            updateThemeIcon() {
+                const icon = document.querySelector('.theme-toggle__icon');
+                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                if (icon) icon.textContent = isDark ? '☀️' : '🌙';
+            },
+
+            render() {
+                const art = this.article;
+
+                // Update page title
+                document.title = `${art.catchyTitle} - Paper Insight`;
+
+                // Header background
+                const header = document.getElementById('articleHeader');
+                header.className = `article-header ${Components.getGradientClass(art.thumbnail)}`;
+
+                // Meta tags
+                const metaContainer = document.getElementById('articleMeta');
+                const readingTime = Components.formatReadingTime(art.readingTime);
+                const isAI = DataManager.isAIRelated(art);
+                metaContainer.innerHTML = `
+          <span class="badge badge--time">${readingTime}</span>
+          ${Components.createTagsHTML(art.tags, isAI)}
+        `;
+
+                // Title & Source
+                document.getElementById('articleTitle').textContent = art.catchyTitle;
+                document.getElementById('articleSource').textContent =
+                    `${art.metadata.source} | ${art.metadata.publishedDate}`;
+
+                // Three points
+                const pointsList = document.getElementById('threePoints');
+                pointsList.innerHTML = art.summary.threePoints.map((point, i) => `
+          <li class="three-points__item">
+            <span class="three-points__number">${i + 1}</span>
+            <span class="three-points__text">${Components.escapeHTML(point)}</span>
+          </li>
+        `).join('');
+
+                // Full summary
+                document.getElementById('fullSummary').textContent = art.summary.fullSummary;
+
+                // Original paper info
+                document.getElementById('originalTitle').textContent = art.originalTitle;
+                const doiLink = document.getElementById('paperDoi');
+                doiLink.textContent = `DOI: ${art.metadata.doi}`;
+                doiLink.href = `https://doi.org/${art.metadata.doi}`;
+
+                // Related articles
+                const relatedArticles = DataManager.getRelatedArticles(art.id);
+                if (relatedArticles.length > 0) {
+                    document.getElementById('relatedSection').style.display = 'block';
+                    const relatedContainer = document.getElementById('relatedCards');
+                    relatedContainer.innerHTML = '';
+                    relatedArticles.forEach(relArt => {
+                        const card = Components.createArticleCard(relArt);
+                        relatedContainer.appendChild(card);
+                    });
+                }
+
+                // Update FAB states
+                this.updateFabStates();
+            },
+
+            updateFabStates() {
+                const bookmarkFab = document.getElementById('fabBookmark');
+                const likeFab = document.getElementById('fabLike');
+
+                if (this.bookmarks.has(this.article.id)) {
+                    bookmarkFab.classList.add('active');
+                    bookmarkFab.textContent = '📑';
+                }
+
+                if (this.likes.has(this.article.id)) {
+                    likeFab.classList.add('active');
+                    likeFab.textContent = '❤️';
+                }
+            },
+
+            setupEventListeners() {
+                // Theme toggle
+                document.getElementById('themeToggle').addEventListener('click', () => {
+                    this.toggleTheme();
+                });
+
+                // Share button
+                document.getElementById('fabShare').addEventListener('click', async () => {
+                    if (navigator.share) {
+                        try {
+                            await navigator.share({
+                                title: this.article.catchyTitle,
+                                text: this.article.summary.oneLine,
+                                url: window.location.href
+                            });
+                        } catch (e) { }
+                    } else {
+                        navigator.clipboard.writeText(window.location.href);
+                        Components.showToast('URLをコピーしました');
+                    }
+                });
+
+                // Bookmark button
+                document.getElementById('fabBookmark').addEventListener('click', () => {
+                    const fab = document.getElementById('fabBookmark');
+                    if (this.bookmarks.has(this.article.id)) {
+                        this.bookmarks.delete(this.article.id);
+                        fab.classList.remove('active');
+                        fab.textContent = '🔖';
+                        Components.showToast('保存済みから削除しました');
+                    } else {
+                        this.bookmarks.add(this.article.id);
+                        fab.classList.add('active');
+                        fab.textContent = '📑';
+                        Components.showToast('あとで読むに保存しました');
+                    }
+                    this.savePreferences();
+                });
+
+                // Like button
+                document.getElementById('fabLike').addEventListener('click', () => {
+                    const fab = document.getElementById('fabLike');
+                    if (this.likes.has(this.article.id)) {
+                        this.likes.delete(this.article.id);
+                        fab.classList.remove('active');
+                        fab.textContent = '🤍';
+                    } else {
+                        this.likes.add(this.article.id);
+                        fab.classList.add('active');
+                        fab.textContent = '❤️';
+                        Components.showToast('いいねしました！');
+                    }
+                    this.savePreferences();
+                });
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            ArticlePage.init();
+        });
+    </script>
+</body>
+
+</html>

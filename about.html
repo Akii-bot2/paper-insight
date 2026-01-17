@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Paper Insight 運営者情報 - サイトについて">
+
+    <title>運営者情報 - Paper Insight</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar">
+        <a href="/" class="navbar__logo">
+            <span class="navbar__logo-icon">📄</span>
+            <span>Paper Insight</span>
+        </a>
+        <div class="navbar__actions">
+            <button class="navbar__btn theme-toggle" id="themeToggle" aria-label="テーマ切り替え">
+                <span class="theme-toggle__icon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="about-page container">
+            <a href="/" class="back-link">← トップに戻る</a>
+
+            <h1 class="about-page__title">🏢 運営者情報</h1>
+
+            <!-- Site Info -->
+            <section class="about-section">
+                <h2>サイトについて</h2>
+                <div class="about-card">
+                    <div class="about-card__header">
+                        <span class="about-card__icon">📄</span>
+                        <h3>Paper Insight</h3>
+                    </div>
+                    <p class="about-card__tagline">論文を、もっと身近に</p>
+                    <p class="about-card__desc">
+                        Paper Insightは、最新の学術論文をわかりやすく要約し、知的好奇心の高い方々に届けるWebメディアです。
+                        難解な専門用語を避け、誰でも「面白い」「役に立つ」と感じられる形で学術研究の成果をお届けします。
+                    </p>
+                </div>
+            </section>
+
+            <!-- Operator Info -->
+            <section class="about-section">
+                <h2>運営者</h2>
+                <table class="info-table">
+                    <tr>
+                        <th>運営者名</th>
+                        <td>Paper Insight 編集部</td>
+                    </tr>
+                    <tr>
+                        <th>お問い合わせ</th>
+                        <td><a href="contact.html">お問い合わせフォーム</a></td>
+                    </tr>
+                    <tr>
+                        <th>設立</th>
+                        <td>2026年1月</td>
+                    </tr>
+                </table>
+            </section>
+
+            <!-- Mission -->
+            <section class="about-section">
+                <h2>ミッション</h2>
+                <div class="mission-grid">
+                    <div class="mission-item">
+                        <span class="mission-item__icon">🎯</span>
+                        <h3>アクセシビリティ</h3>
+                        <p>専門知識がなくても、最新の学術研究に触れられる環境を作る</p>
+                    </div>
+                    <div class="mission-item">
+                        <span class="mission-item__icon">💡</span>
+                        <h3>セレンディピティ</h3>
+                        <p>思いがけない分野との出会いを通じて、新しい視点を提供する</p>
+                    </div>
+                    <div class="mission-item">
+                        <span class="mission-item__icon">⚡</span>
+                        <h3>効率性</h3>
+                        <p>忙しい現代人が隙間時間で知識を得られるよう、要点を凝縮する</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Categories -->
+            <section class="about-section">
+                <h2>取り扱いカテゴリ</h2>
+                <div class="category-badges">
+                    <span class="category-badge">🌌 自然科学</span>
+                    <span class="category-badge category-badge--ai">🤖 AI・テクノロジー</span>
+                    <span class="category-badge">🧠 人間科学・心理</span>
+                    <span class="category-badge">📊 社会科学・ビジネス</span>
+                    <span class="category-badge">🏥 医歯薬学・ヘルスケア</span>
+                </div>
+            </section>
+
+            <!-- Disclaimer -->
+            <section class="about-section">
+                <h2>免責事項</h2>
+                <div class="disclaimer-box">
+                    <p>当サイトの記事は、学術論文の内容をわかりやすく要約したものであり、医療・法律・投資等のアドバイスを目的としたものではありません。</p>
+                    <p>掲載情報の正確性には万全を期していますが、その内容を保証するものではありません。情報のご利用は自己責任でお願いいたします。</p>
+                </div>
+            </section>
+
+            <!-- Links -->
+            <section class="about-section">
+                <h2>関連リンク</h2>
+                <ul class="link-list">
+                    <li><a href="privacy.html">📋 プライバシーポリシー</a></li>
+                    <li><a href="contact.html">📬 お問い合わせ</a></li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="site-footer__links">
+                <a href="privacy.html">プライバシーポリシー</a>
+                <a href="contact.html">お問い合わせ</a>
+                <a href="about.html">運営者情報</a>
+            </div>
+            <p class="site-footer__copyright">© 2026 Paper Insight. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const initTheme = () => {
+            const saved = localStorage.getItem('paperinsight_theme');
+            if (saved) document.documentElement.setAttribute('data-theme', saved);
+            else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+            updateIcon();
+        };
+        const updateIcon = () => {
+            const icon = themeToggle.querySelector('.theme-toggle__icon');
+            icon.textContent = document.documentElement.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+        };
+        themeToggle.addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('paperinsight_theme', next);
+            updateIcon();
+        });
+        initTheme();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,207 @@
+/* ===========================================
+   Paper Insight - Responsive Styles
+   =========================================== */
+
+/* ===== Main Content Layout ===== */
+.main-content {
+    padding-top: calc(var(--nav-height) + 52px);
+    padding-bottom: calc(var(--bottom-nav-height) + var(--spacing-4));
+    min-height: 100vh;
+}
+
+/* ===== Mobile First (Default) ===== */
+.container {
+    padding: 0 var(--spacing-4);
+}
+
+/* ===== Small Tablets (640px+) ===== */
+@media (min-width: 640px) {
+    .container {
+        padding: 0 var(--spacing-6);
+    }
+
+    .navbar {
+        padding: 0 var(--spacing-6);
+    }
+
+    .article-card__thumbnail {
+        height: 160px;
+    }
+}
+
+/* ===== Tablets (768px+) ===== */
+@media (min-width: 768px) {
+    :root {
+        --nav-height: 64px;
+        --bottom-nav-height: 0px;
+    }
+
+    .bottom-nav {
+        display: none;
+    }
+
+    .main-content {
+        padding-bottom: var(--spacing-8);
+    }
+
+    .navbar__desktop-nav {
+        display: flex;
+    }
+
+    .article-card__title {
+        font-size: var(--font-size-xl);
+    }
+}
+
+/* ===== Desktop (1024px+) ===== */
+@media (min-width: 1024px) {
+    .container {
+        max-width: var(--max-width-content);
+        margin: 0 auto;
+        padding: 0 var(--spacing-8);
+    }
+
+    .navbar {
+        padding: 0 var(--spacing-8);
+    }
+
+    .category-tabs {
+        position: static;
+        border-bottom: none;
+        background: transparent;
+    }
+
+    .category-tabs__list {
+        justify-content: center;
+        padding: var(--spacing-4) 0;
+    }
+
+    .main-content {
+        padding-top: calc(var(--nav-height) + var(--spacing-4));
+    }
+
+    .article-card__thumbnail {
+        height: 180px;
+    }
+
+    .search-section {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+}
+
+/* ===== Large Desktop (1280px+) ===== */
+@media (min-width: 1280px) {
+    .cards-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ===== Touch Device Optimizations ===== */
+@media (hover: none) and (pointer: coarse) {
+    .article-card:hover {
+        transform: none;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .article-card:active {
+        transform: scale(0.98);
+        box-shadow: var(--shadow-md);
+    }
+
+    .action-btn {
+        width: 44px;
+        height: 44px;
+    }
+
+    .category-tabs__item {
+        padding: var(--spacing-3) var(--spacing-4);
+    }
+}
+
+/* ===== Dark Mode System Preference ===== */
+@media (prefers-color-scheme: dark) {
+    html:not([data-theme]) {
+        --color-bg-primary: #0D1117;
+        --color-bg-secondary: #161B22;
+        --color-bg-card: #21262D;
+        --color-bg-card-hover: #30363D;
+
+        --color-text-primary: #E6EDF3;
+        --color-text-secondary: #8B949E;
+        --color-text-tertiary: #6E7681;
+        --color-text-inverse: #0D1117;
+
+        --color-primary: #2DD4BF;
+        --color-primary-light: #5EEAD4;
+        --color-primary-dark: #14B8A6;
+
+        --color-ai-accent: #A78BFA;
+        --color-ai-accent-light: #C4B5FD;
+        --color-ai-accent-bg: rgba(167, 139, 250, 0.15);
+
+        --color-border: #30363D;
+        --color-border-light: #21262D;
+
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+        --shadow-card-hover: 0 12px 24px -4px rgba(0, 0, 0, 0.5);
+    }
+}
+
+/* ===== Reduced Motion ===== */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* ===== Print Styles ===== */
+@media print {
+
+    .navbar,
+    .bottom-nav,
+    .category-tabs,
+    .action-btn {
+        display: none !important;
+    }
+
+    .main-content {
+        padding: 0;
+    }
+
+    .article-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+}
+
+/* ===== High Contrast Mode ===== */
+@media (prefers-contrast: high) {
+    :root {
+        --color-border: #000;
+        --shadow-sm: none;
+        --shadow-md: none;
+        --shadow-lg: none;
+    }
+
+    .article-card {
+        border: 2px solid var(--color-text-primary);
+    }
+
+    .tag,
+    .badge {
+        border: 1px solid currentColor;
+    }
+}

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Paper Insight - 学術論文の要約をサクサク読める。知的好奇心を刺激する新しい発見を、毎日あなたに。">
+  <meta name="theme-color" content="#0D9488">
+
+  <title>Paper Insight - 論文をもっと身近に</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/pages.css">
+
+  <style>
+    /* Page-specific styles */
+    .hero-section {
+      text-align: center;
+      padding: var(--spacing-8) var(--spacing-4);
+      margin-bottom: var(--spacing-4);
+    }
+
+    .hero-section__title {
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-bold);
+      margin-bottom: var(--spacing-2);
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-ai-accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-section__subtitle {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-sm);
+    }
+
+    .search-section {
+      padding: 0 var(--spacing-4);
+      margin-bottom: var(--spacing-4);
+    }
+
+    .filters-section {
+      padding: 0 var(--spacing-4);
+      margin-bottom: var(--spacing-6);
+    }
+
+    .articles-section {
+      padding: 0 var(--spacing-4);
+    }
+
+    @media (min-width: 1024px) {
+      .hero-section__title {
+        font-size: var(--font-size-4xl);
+      }
+
+      .hero-section__subtitle {
+        font-size: var(--font-size-base);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Top Navigation -->
+  <nav class="navbar" role="navigation" aria-label="メインナビゲーション">
+    <a href="/" class="navbar__logo">
+      <span class="navbar__logo-icon">📄</span>
+      <span>Paper Insight</span>
+    </a>
+    <div class="navbar__actions">
+      <button class="navbar__btn theme-toggle" id="themeToggle" aria-label="テーマ切り替え">
+        <span class="theme-toggle__icon">🌙</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Category Tabs -->
+  <div class="category-tabs" role="tablist" aria-label="カテゴリー">
+    <div class="category-tabs__list" id="categoryTabs">
+      <!-- Populated by JavaScript -->
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <h1 class="hero-section__title">論文を、もっと身近に</h1>
+      <p class="hero-section__subtitle">最新の学術研究をわかりやすく。毎日の発見を、あなたに。</p>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+      <div class="search-box">
+        <span class="search-box__icon">🔍</span>
+        <input type="search" class="search-box__input" id="searchInput" placeholder="キーワードで探す..." aria-label="記事を検索">
+      </div>
+    </section>
+
+    <!-- Mood Filters -->
+    <section class="filters-section">
+      <div class="mood-filters" id="moodFilters" role="group" aria-label="気分で絞り込み">
+        <!-- Populated by JavaScript -->
+      </div>
+    </section>
+
+    <!-- Articles Grid -->
+    <section class="articles-section">
+      <div class="section-header">
+        <h2 class="section-header__title" id="sectionTitle">すべての記事</h2>
+        <span class="section-header__link" id="articleCount">0件</span>
+      </div>
+      <div class="cards-grid" id="articlesGrid">
+        <!-- Populated by JavaScript -->
+      </div>
+
+      <!-- Empty State -->
+      <div class="empty-state" id="emptyState" style="display: none;">
+        <div class="empty-state__icon">🔍</div>
+        <h3 class="empty-state__title">記事が見つかりませんでした</h3>
+        <p class="empty-state__desc">別のキーワードやフィルターをお試しください</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__links">
+        <a href="privacy.html">プライバシーポリシー</a>
+        <a href="contact.html">お問い合わせ</a>
+        <a href="about.html">運営者情報</a>
+      </div>
+      <p class="site-footer__copyright">© 2026 Paper Insight. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Bottom Navigation (Mobile) -->
+  <nav class="bottom-nav" role="navigation" aria-label="フッターナビゲーション">
+    <a href="/" class="bottom-nav__item active">
+      <span class="bottom-nav__icon">🏠</span>
+      <span class="bottom-nav__label">ホーム</span>
+    </a>
+    <a href="#" class="bottom-nav__item" id="navSearch">
+      <span class="bottom-nav__icon">🔍</span>
+      <span class="bottom-nav__label">検索</span>
+    </a>
+    <a href="#" class="bottom-nav__item" id="navBookmark">
+      <span class="bottom-nav__icon">🔖</span>
+      <span class="bottom-nav__label">保存済み</span>
+    </a>
+    <a href="#" class="bottom-nav__item" id="navSettings">
+      <span class="bottom-nav__icon">⚙️</span>
+      <span class="bottom-nav__label">設定</span>
+    </a>
+  </nav>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>

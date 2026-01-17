@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Paper Insight へのお問い合わせ">
+
+    <title>お問い合わせ - Paper Insight</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar">
+        <a href="/" class="navbar__logo">
+            <span class="navbar__logo-icon">📄</span>
+            <span>Paper Insight</span>
+        </a>
+        <div class="navbar__actions">
+            <button class="navbar__btn theme-toggle" id="themeToggle" aria-label="テーマ切り替え">
+                <span class="theme-toggle__icon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="contact-page container">
+            <a href="/" class="back-link">← トップに戻る</a>
+
+            <h1 class="contact-page__title">📬 お問い合わせ</h1>
+            <p class="contact-page__desc">ご質問、ご要望、広告掲載のご相談などお気軽にお問い合わせください。</p>
+
+            <form class="contact-form" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <div class="form-group">
+                    <label for="name" class="form-label">お名前 <span class="required">*</span></label>
+                    <input type="text" id="name" name="name" class="form-input" required placeholder="山田 太郎">
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="form-label">メールアドレス <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" class="form-input" required
+                        placeholder="example@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="category" class="form-label">お問い合わせ種別</label>
+                    <select id="category" name="category" class="form-select">
+                        <option value="general">一般的なお問い合わせ</option>
+                        <option value="content">記事内容について</option>
+                        <option value="advertising">広告掲載のご相談</option>
+                        <option value="collaboration">コラボレーションのご提案</option>
+                        <option value="bug">不具合の報告</option>
+                        <option value="other">その他</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message" class="form-label">メッセージ <span class="required">*</span></label>
+                    <textarea id="message" name="message" class="form-textarea" required rows="6"
+                        placeholder="お問い合わせ内容をご記入ください"></textarea>
+                </div>
+
+                <div class="form-group form-checkbox">
+                    <input type="checkbox" id="privacy" name="privacy" required>
+                    <label for="privacy">
+                        <a href="privacy.html" target="_blank">プライバシーポリシー</a>に同意する <span class="required">*</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="form-submit">
+                    <span>送信する</span>
+                    <span class="submit-icon">→</span>
+                </button>
+            </form>
+
+            <div class="contact-note">
+                <h3>📌 ご注意</h3>
+                <ul>
+                    <li>お返事には2〜3営業日いただく場合があります</li>
+                    <li>内容によってはお返事できない場合があります</li>
+                    <li>広告掲載についてはメディアキットをご用意しています</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="site-footer__links">
+                <a href="privacy.html">プライバシーポリシー</a>
+                <a href="contact.html">お問い合わせ</a>
+                <a href="about.html">運営者情報</a>
+            </div>
+            <p class="site-footer__copyright">© 2026 Paper Insight. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const initTheme = () => {
+            const saved = localStorage.getItem('paperinsight_theme');
+            if (saved) document.documentElement.setAttribute('data-theme', saved);
+            else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+            updateIcon();
+        };
+        const updateIcon = () => {
+            const icon = themeToggle.querySelector('.theme-toggle__icon');
+            icon.textContent = document.documentElement.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+        };
+        themeToggle.addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('paperinsight_theme', next);
+            updateIcon();
+        });
+        initTheme();
+
+        // Form submission feedback
+        const form = document.getElementById('contactForm');
+        form.addEventListener('submit', function (e) {
+            // For static site, you'll need to set up Formspree or similar service
+            // This is just UI feedback
+            const btn = form.querySelector('.form-submit');
+            btn.innerHTML = '<span>送信中...</span>';
+            btn.disabled = true;
+        });
+    </script>
+</body>
+
+</html>
