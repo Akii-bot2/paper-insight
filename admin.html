@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>記事管理ツール - Paper Insight Admin</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages.css">
+
+    <style>
+        .admin-page {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: calc(var(--nav-height) + var(--spacing-6)) var(--spacing-4) var(--spacing-16);
+        }
+
+        .admin-header {
+            text-align: center;
+            margin-bottom: var(--spacing-8);
+        }
+
+        .admin-header__title {
+            font-size: var(--font-size-2xl);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .admin-header__desc {
+            color: var(--color-text-secondary);
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: var(--spacing-2);
+            margin-bottom: var(--spacing-6);
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: var(--spacing-2);
+        }
+
+        .admin-tab {
+            padding: var(--spacing-2) var(--spacing-4);
+            border-radius: var(--radius-md);
+            font-weight: var(--font-weight-medium);
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .admin-tab:hover {
+            color: var(--color-text-primary);
+            background: var(--color-bg-secondary);
+        }
+
+        .admin-tab.active {
+            color: var(--color-primary);
+            background: var(--color-ai-accent-bg);
+        }
+
+        .admin-section {
+            display: none;
+        }
+
+        .admin-section.active {
+            display: block;
+        }
+
+        .form-card {
+            background: var(--color-bg-card);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-6);
+            margin-bottom: var(--spacing-6);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .form-card__title {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--spacing-4);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-4);
+            margin-bottom: var(--spacing-4);
+        }
+
+        @media (min-width: 640px) {
+            .form-row--2col {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-2);
+        }
+
+        .form-label {
+            font-weight: var(--font-weight-medium);
+            font-size: var(--font-size-sm);
+        }
+
+        .form-label .hint {
+            font-weight: normal;
+            color: var(--color-text-tertiary);
+            margin-left: var(--spacing-2);
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            padding: var(--spacing-3) var(--spacing-4);
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-base);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-textarea--tall {
+            min-height: 150px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-2);
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            padding: var(--spacing-2) var(--spacing-3);
+            background: var(--color-bg-secondary);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .checkbox-item:hover {
+            background: var(--color-bg-card-hover);
+        }
+
+        .checkbox-item input:checked+span {
+            color: var(--color-primary);
+            font-weight: var(--font-weight-medium);
+        }
+
+        .color-picker-group {
+            display: flex;
+            gap: var(--spacing-3);
+        }
+
+        .color-picker {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
+        }
+
+        .color-picker input[type="color"] {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+        }
+
+        .gradient-preview {
+            width: 100%;
+            height: 60px;
+            border-radius: var(--radius-md);
+            margin-top: var(--spacing-2);
+        }
+
+        .tag-input-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-2);
+            padding: var(--spacing-2);
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            min-height: 48px;
+        }
+
+        .tag-input-container .tag {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-1);
+            padding: var(--spacing-1) var(--spacing-2);
+            background: var(--color-primary);
+            color: white;
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-sm);
+        }
+
+        .tag-input-container .tag-remove {
+            cursor: pointer;
+            opacity: 0.7;
+        }
+
+        .tag-input-container .tag-remove:hover {
+            opacity: 1;
+        }
+
+        .tag-input-container input {
+            flex: 1;
+            min-width: 100px;
+            border: none;
+            background: transparent;
+            padding: var(--spacing-1);
+            font-size: var(--font-size-base);
+        }
+
+        .tag-input-container input:focus {
+            outline: none;
+        }
+
+        .output-section {
+            margin-top: var(--spacing-8);
+        }
+
+        .output-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-4);
+        }
+
+        .output-header h3 {
+            font-size: var(--font-size-lg);
+        }
+
+        .output-actions {
+            display: flex;
+            gap: var(--spacing-2);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            padding: var(--spacing-2) var(--spacing-4);
+            border-radius: var(--radius-md);
+            font-weight: var(--font-weight-medium);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .btn--primary {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn--primary:hover {
+            background: var(--color-primary-dark);
+        }
+
+        .btn--secondary {
+            background: var(--color-bg-secondary);
+            color: var(--color-text-primary);
+        }
+
+        .btn--secondary:hover {
+            background: var(--color-bg-card-hover);
+        }
+
+        .json-output {
+            background: var(--color-bg-secondary);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-4);
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: var(--font-size-sm);
+            line-height: 1.6;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .preview-card-container {
+            display: flex;
+            justify-content: center;
+            padding: var(--spacing-6);
+            background: var(--color-bg-secondary);
+            border-radius: var(--radius-lg);
+        }
+
+        .preview-card-container .article-card {
+            max-width: 350px;
+            width: 100%;
+        }
+
+        .instructions {
+            background: var(--color-ai-accent-bg);
+            border-left: 4px solid var(--color-ai-accent);
+            padding: var(--spacing-4);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-6);
+        }
+
+        .instructions h4 {
+            color: var(--color-ai-accent);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .instructions ol {
+            margin-left: var(--spacing-4);
+            color: var(--color-text-secondary);
+        }
+
+        .instructions li {
+            list-style: decimal;
+            margin-bottom: var(--spacing-1);
+        }
+
+        .instructions code {
+            background: var(--color-bg-card);
+            padding: var(--spacing-1) var(--spacing-2);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-sm);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="navbar__logo">
+            <span class="navbar__logo-icon">📄</span>
+            <span>Paper Insight</span>
+        </a>
+        <div class="navbar__actions">
+            <button class="navbar__btn theme-toggle" id="themeToggle" aria-label="テーマ切り替え">
+                <span class="theme-toggle__icon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="admin-page">
+        <header class="admin-header">
+            <h1 class="admin-header__title">📝 記事管理ツール</h1>
+            <p class="admin-header__desc">フォームに入力して、新しい記事のJSONを生成します</p>
+        </header>
+
+        <!-- Instructions -->
+        <div class="instructions">
+            <h4>📋 使い方</h4>
+            <ol>
+                <li>下のフォームに記事情報を入力</li>
+                <li>「JSONを生成」ボタンをクリック</li>
+                <li>生成されたJSONをコピー</li>
+                <li><code>data/articles.json</code>の<code>articles</code>配列に追加</li>
+                <li>GitHubにプッシュして公開</li>
+            </ol>
+        </div>
+
+        <!-- Tabs -->
+        <div class="admin-tabs">
+            <button class="admin-tab active" data-tab="form">✏️ 記事作成</button>
+            <button class="admin-tab" data-tab="preview">👁️ プレビュー</button>
+            <button class="admin-tab" data-tab="output">📋 JSON出力</button>
+        </div>
+
+        <!-- Form Section -->
+        <section class="admin-section active" id="formSection">
+            <!-- Basic Info -->
+            <div class="form-card">
+                <h2 class="form-card__title">📰 基本情報</h2>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">記事ID <span class="hint">例: art-010</span></label>
+                        <input type="text" id="articleId" class="form-input" placeholder="art-010" value="art-010">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">キャッチータイトル <span class="hint">読者の目を引くタイトル</span></label>
+                        <input type="text" id="catchyTitle" class="form-input" placeholder="例: マルチタスクは本当に効率が悪いのか？">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">論文原題 <span class="hint">英語の論文タイトル</span></label>
+                        <input type="text" id="originalTitle" class="form-input"
+                            placeholder="例: Task Switching Costs and Cognitive Performance">
+                    </div>
+                </div>
+
+                <div class="form-row form-row--2col">
+                    <div class="form-group">
+                        <label class="form-label">読了時間（秒）</label>
+                        <input type="number" id="readingTime" class="form-input" value="45" min="10" max="300">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">公開日</label>
+                        <input type="date" id="publishedDate" class="form-input">
+                    </div>
+                </div>
+
+                <div class="form-row form-row--2col">
+                    <div class="form-group">
+                        <label class="form-label">出典（ジャーナル名）</label>
+                        <input type="text" id="source" class="form-input" placeholder="例: Nature">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">DOI</label>
+                        <input type="text" id="doi" class="form-input" placeholder="例: 10.1038/xxxxx">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="form-card">
+                <h2 class="form-card__title">📝 要約</h2>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">1行要約</label>
+                        <input type="text" id="oneLine" class="form-input" placeholder="1文で内容を要約">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">ポイント1</label>
+                        <input type="text" id="point1" class="form-input" placeholder="重要なポイント1つ目">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">ポイント2</label>
+                        <input type="text" id="point2" class="form-input" placeholder="重要なポイント2つ目">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">ポイント3</label>
+                        <input type="text" id="point3" class="form-input" placeholder="重要なポイント3つ目">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">詳細な解説</label>
+                        <textarea id="fullSummary" class="form-textarea form-textarea--tall"
+                            placeholder="詳しい解説文を入力..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories & Tags -->
+            <div class="form-card">
+                <h2 class="form-card__title">🏷️ カテゴリ・タグ</h2>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">学問カテゴリ（複数選択可）</label>
+                        <div class="checkbox-group" id="standardCategories">
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="nature-science">
+                                <span>🌌 自然科学</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="ai-technology">
+                                <span>🤖 AI・テクノロジー</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="human-mind">
+                                <span>🧠 人間科学・心理</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="society-business">
+                                <span>📊 社会科学・ビジネス</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="health-medical">
+                                <span>🏥 医歯薬学</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">テーマカテゴリ（複数選択可）</label>
+                        <div class="checkbox-group" id="thematicCategories">
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="life-hacks">
+                                <span>✨ ライフハック</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="applied-ai">
+                                <span>🔮 AI × 〇〇</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="future-trends">
+                                <span>🚀 未来予測</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="thinking-models">
+                                <span>💡 思考法</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="sustainability">
+                                <span>🌱 サステナビリティ</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">タグ <span class="hint">Enterで追加</span></label>
+                        <div class="tag-input-container" id="tagContainer">
+                            <input type="text" id="tagInput" placeholder="タグを入力してEnter...">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">気分タグ（複数選択可）</label>
+                        <div class="checkbox-group" id="moodCategories">
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="motivating">
+                                <span>💪 元気が欲しい</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="practical">
+                                <span>🛠️ すぐ使える知識</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="thought-provoking">
+                                <span>🤔 じっくり考えたい</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="inspiring">
+                                <span>✨ ワクワクしたい</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thumbnail -->
+            <div class="form-card">
+                <h2 class="form-card__title">🎨 サムネイル</h2>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">グラデーション色</label>
+                        <div class="color-picker-group">
+                            <div class="color-picker">
+                                <label>開始色</label>
+                                <input type="color" id="color1" value="#667eea">
+                            </div>
+                            <div class="color-picker">
+                                <label>終了色</label>
+                                <input type="color" id="color2" value="#764ba2">
+                            </div>
+                        </div>
+                        <div class="gradient-preview" id="gradientPreview"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Generate Button -->
+            <div style="text-align: center; margin-top: var(--spacing-6);">
+                <button class="btn btn--primary" id="generateBtn"
+                    style="padding: var(--spacing-4) var(--spacing-8); font-size: var(--font-size-lg);">
+                    🚀 JSONを生成
+                </button>
+            </div>
+        </section>
+
+        <!-- Preview Section -->
+        <section class="admin-section" id="previewSection">
+            <div class="preview-card-container">
+                <article class="article-card" id="previewCard">
+                    <div class="article-card__thumbnail" id="previewThumbnail">
+                        <span class="article-card__thumbnail-icon">🧠</span>
+                    </div>
+                    <div class="article-card__body">
+                        <div class="article-card__meta" id="previewMeta">
+                            <span class="badge badge--time">45秒で読める</span>
+                            <span class="tag">タグ</span>
+                        </div>
+                        <h3 class="article-card__title" id="previewTitle">タイトルがここに表示されます</h3>
+                        <p class="article-card__summary" id="previewSummary">1行要約がここに表示されます</p>
+                        <div class="article-card__footer">
+                            <span class="article-card__source" id="previewSource">出典</span>
+                            <div class="article-card__actions">
+                                <button class="action-btn">🔖</button>
+                                <button class="action-btn">🤍</button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Output Section -->
+        <section class="admin-section" id="outputSection">
+            <div class="output-header">
+                <h3>📋 生成されたJSON</h3>
+                <div class="output-actions">
+                    <button class="btn btn--secondary" id="copyBtn">📋 コピー</button>
+                    <button class="btn btn--secondary" id="downloadBtn">⬇️ ダウンロード</button>
+                </div>
+            </div>
+            <pre class="json-output" id="jsonOutput">// フォームに入力してから「JSONを生成」をクリックしてください</pre>
+        </section>
+    </main>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // State
+        let tags = [];
+        let generatedJson = null;
+
+        // DOM Elements
+        const elements = {
+            articleId: document.getElementById('articleId'),
+            catchyTitle: document.getElementById('catchyTitle'),
+            originalTitle: document.getElementById('originalTitle'),
+            readingTime: document.getElementById('readingTime'),
+            publishedDate: document.getElementById('publishedDate'),
+            source: document.getElementById('source'),
+            doi: document.getElementById('doi'),
+            oneLine: document.getElementById('oneLine'),
+            point1: document.getElementById('point1'),
+            point2: document.getElementById('point2'),
+            point3: document.getElementById('point3'),
+            fullSummary: document.getElementById('fullSummary'),
+            color1: document.getElementById('color1'),
+            color2: document.getElementById('color2'),
+            gradientPreview: document.getElementById('gradientPreview'),
+            tagInput: document.getElementById('tagInput'),
+            tagContainer: document.getElementById('tagContainer'),
+            generateBtn: document.getElementById('generateBtn'),
+            copyBtn: document.getElementById('copyBtn'),
+            downloadBtn: document.getElementById('downloadBtn'),
+            jsonOutput: document.getElementById('jsonOutput')
+        };
+
+        // Initialize
+        function init() {
+            initTheme();
+            initDate();
+            initGradientPreview();
+            setupEventListeners();
+        }
+
+        // Theme
+        function initTheme() {
+            const saved = localStorage.getItem('paperinsight_theme');
+            if (saved) document.documentElement.setAttribute('data-theme', saved);
+            else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+            updateThemeIcon();
+        }
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('paperinsight_theme', next);
+            updateThemeIcon();
+        }
+
+        function updateThemeIcon() {
+            const icon = document.querySelector('.theme-toggle__icon');
+            icon.textContent = document.documentElement.getAttribute('data-theme') === 'dark' ? '☀️' : '🌙';
+        }
+
+        // Set today's date
+        function initDate() {
+            const today = new Date().toISOString().split('T')[0];
+            elements.publishedDate.value = today;
+        }
+
+        // Gradient preview
+        function initGradientPreview() {
+            updateGradientPreview();
+        }
+
+        function updateGradientPreview() {
+            const c1 = elements.color1.value;
+            const c2 = elements.color2.value;
+            elements.gradientPreview.style.background = `linear-gradient(135deg, ${c1} 0%, ${c2} 100%)`;
+        }
+
+        // Tags
+        function addTag(tag) {
+            tag = tag.trim();
+            if (tag && !tags.includes(tag)) {
+                tags.push(tag);
+                renderTags();
+            }
+        }
+
+        function removeTag(tag) {
+            tags = tags.filter(t => t !== tag);
+            renderTags();
+        }
+
+        function renderTags() {
+            const container = elements.tagContainer;
+            const input = elements.tagInput;
+            container.innerHTML = '';
+
+            tags.forEach(tag => {
+                const tagEl = document.createElement('span');
+                tagEl.className = 'tag';
+                tagEl.innerHTML = `${tag} <span class="tag-remove" data-tag="${tag}">×</span>`;
+                container.appendChild(tagEl);
+            });
+
+            container.appendChild(input);
+            input.value = '';
+        }
+
+        // Get checked values
+        function getCheckedValues(containerId) {
+            const container = document.getElementById(containerId);
+            const checked = container.querySelectorAll('input:checked');
+            return Array.from(checked).map(cb => cb.value);
+        }
+
+        // Generate JSON
+        function generateArticleJson() {
+            const article = {
+                id: elements.articleId.value || 'art-new',
+                originalTitle: elements.originalTitle.value,
+                catchyTitle: elements.catchyTitle.value,
+                summary: {
+                    oneLine: elements.oneLine.value,
+                    threePoints: [
+                        elements.point1.value,
+                        elements.point2.value,
+                        elements.point3.value
+                    ].filter(p => p),
+                    fullSummary: elements.fullSummary.value
+                },
+                readingTime: parseInt(elements.readingTime.value) || 45,
+                categories: {
+                    standard: getCheckedValues('standardCategories'),
+                    thematic: getCheckedValues('thematicCategories')
+                },
+                tags: [...tags],
+                thumbnail: {
+                    type: 'gradient',
+                    colors: [elements.color1.value, elements.color2.value]
+                },
+                metadata: {
+                    source: elements.source.value,
+                    publishedDate: elements.publishedDate.value,
+                    doi: elements.doi.value
+                },
+                mood: getCheckedValues('moodCategories'),
+                relatedArticles: []
+            };
+
+            generatedJson = article;
+            elements.jsonOutput.textContent = JSON.stringify(article, null, 2);
+            updatePreview(article);
+            showToast('JSONを生成しました！');
+
+            // Switch to output tab
+            switchTab('output');
+        }
+
+        // Update preview card
+        function updatePreview(article) {
+            document.getElementById('previewTitle').textContent = article.catchyTitle || 'タイトル';
+            document.getElementById('previewSummary').textContent = article.summary.oneLine || '1行要約';
+            document.getElementById('previewSource').textContent = article.metadata.source || '出典';
+
+            const thumbnail = document.getElementById('previewThumbnail');
+            thumbnail.style.background = `linear-gradient(135deg, ${article.thumbnail.colors[0]} 0%, ${article.thumbnail.colors[1]} 100%)`;
+
+            const meta = document.getElementById('previewMeta');
+            const readingTimeText = article.readingTime < 60
+                ? `${article.readingTime}秒で読める`
+                : `${Math.round(article.readingTime / 60)}分で読める`;
+
+            meta.innerHTML = `
+        <span class="badge badge--time">${readingTimeText}</span>
+        ${article.tags.slice(0, 2).map(t => `<span class="tag">${t}</span>`).join('')}
+      `;
+        }
+
+        // Tab switching
+        function switchTab(tabId) {
+            document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+
+            document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+            document.getElementById(`${tabId}Section`).classList.add('active');
+        }
+
+        // Copy to clipboard
+        function copyToClipboard() {
+            if (!generatedJson) {
+                showToast('先にJSONを生成してください');
+                return;
+            }
+            navigator.clipboard.writeText(JSON.stringify(generatedJson, null, 2));
+            showToast('クリップボードにコピーしました！');
+        }
+
+        // Download JSON
+        function downloadJson() {
+            if (!generatedJson) {
+                showToast('先にJSONを生成してください');
+                return;
+            }
+            const blob = new Blob([JSON.stringify(generatedJson, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${generatedJson.id || 'article'}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('ダウンロードしました');
+        }
+
+        // Toast
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+
+        // Event listeners
+        function setupEventListeners() {
+            // Theme toggle
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+
+            // Tab switching
+            document.querySelectorAll('.admin-tab').forEach(tab => {
+                tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+            });
+
+            // Gradient preview
+            elements.color1.addEventListener('input', updateGradientPreview);
+            elements.color2.addEventListener('input', updateGradientPreview);
+
+            // Tag input
+            elements.tagInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    addTag(e.target.value);
+                }
+            });
+
+            elements.tagContainer.addEventListener('click', (e) => {
+                if (e.target.classList.contains('tag-remove')) {
+                    removeTag(e.target.dataset.tag);
+                }
+            });
+
+            // Generate button
+            elements.generateBtn.addEventListener('click', generateArticleJson);
+
+            // Copy & Download
+            elements.copyBtn.addEventListener('click', copyToClipboard);
+            elements.downloadBtn.addEventListener('click', downloadJson);
+
+            // Live preview update on input
+            const inputsForPreview = ['catchyTitle', 'oneLine', 'source', 'readingTime'];
+            inputsForPreview.forEach(id => {
+                document.getElementById(id).addEventListener('input', () => {
+                    if (generatedJson) {
+                        generateArticleJson();
+                    }
+                });
+            });
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+
+</html>
