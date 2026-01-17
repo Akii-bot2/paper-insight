@@ -43,6 +43,55 @@
         "practical"
       ],
       "relatedArticles": []
+    },
+    {
+      "id": "art-001",
+      "originalTitle": "Stress appraisal in the workplace and its associations with productivity and mood: Insights from a multimodal machine learning analysis",
+      "catchyTitle": "適度なストレスが生産性を上げる？科学が解明した「良いストレス」の正体",
+      "summary": {
+        "oneLine": "ストレスには「良いストレス（ユーストレス）」と「悪いストレス（ディストレス）」があり、適度なストレスは生産性と良い気分に関連する",
+        "threePoints": [
+          "適度なストレスレベルの人は、生産性が高くポジティブな気分を維持している",
+          "退屈（低ストレス）と過度なストレス（ディストレス）はどちらも生産性を下げる",
+          "機械学習モデルで83%の精度でストレス状態を予測可能に"
+        ],
+        "fullSummary": "南カリフォルニア大学の研究チームが、職場のストレスと生産性・気分の関係を科学的に解明しました。研究では、ストレスを4つのカテゴリ（退屈、ユーストレス、ユーストレス+ディストレス共存、ディストレス）に分類。その結果、適度なストレス（ユーストレス）状態の人は生産性が高く、ポジティブな気分を維持していることが判明。一方、退屈（刺激不足）と過度なストレス（ディストレス）はどちらも生産性を低下させました。これは心理学で有名な「ヤーキーズ・ドッドソンの法則」を裏付ける結果です。さらに、皮膚電気活動や皮膚温度などの生体データから、機械学習モデルで83%の精度でストレス状態を予測できることも示されました。この発見は、職場環境の設計やストレス管理に活用できる可能性があります。"
+      },
+      "readingTime": 55,
+      "categories": {
+        "standard": [
+          "human-mind",
+          "society-business"
+        ],
+        "thematic": [
+          "life-hacks",
+          "applied-ai"
+        ]
+      },
+      "tags": [
+        "ストレス",
+        "生産性",
+        "職場",
+        "メンタルヘルス",
+        "機械学習"
+      ],
+      "thumbnail": {
+        "type": "gradient",
+        "colors": [
+          "#8B5CF6",
+          "#EC4899"
+        ]
+      },
+      "metadata": {
+        "source": "PLOS ONE (CC BY 4.0)",
+        "publishedDate": "2024-01-02",
+        "doi": "10.1371/journal.pone.0296468"
+      },
+      "mood": [
+        "practical",
+        "thought-provoking"
+      ],
+      "relatedArticles": []
     }
   ],
   "categories": {
