@@ -325,18 +325,28 @@ const App = {
             });
         }
 
-        // Bottom nav - Bookmarks
+        // Bottom nav - Bookmarks (Library)
         const navBookmark = document.getElementById('navBookmark');
         if (navBookmark) {
             navBookmark.addEventListener('click', (e) => {
+                // If we are already on the library page, do nothing or maybe switch tab?
+                // For now, let standard navigation happen if it's an anchor tag
+                // But since we are using event prevention in the original code, we should change it.
+                // Actually, the HTML in index.html is likely <a href="#" id="navBookmark">
+                // implementation_plan says we should link to library.html
+
+                // If it's an anchor with href="library.html", we don't need JS redirect unless we want SPA feel
+                // But the original code had e.preventDefault().
+                // Let's remove the preventDefault and let the anchor tag work, 
+                // OR implementation it as a location change.
+
+                // Let's assume we update the HTML to href="library.html" in the next step.
+                // So we can just remove this event listener or strictly use it for tracking.
+
+                // However, the current task is to modify the existing `app.js`.
+                // Let's make it redirect.
                 e.preventDefault();
-                // Show only bookmarked articles
-                if (this.bookmarks.size === 0) {
-                    Components.showToast('保存済みの記事がありません');
-                    return;
-                }
-                // TODO: Implement bookmarks view
-                Components.showToast('ブックマーク機能は開発中です');
+                window.location.href = 'library.html';
             });
         }
     }

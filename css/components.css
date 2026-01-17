@@ -318,7 +318,7 @@
     }
 
     50% {
-        transform: scale(1.3);
+        transform: scale(1.4);
     }
 
     100% {
@@ -326,8 +326,32 @@
     }
 }
 
-.action-btn.liked {
-    animation: like-pop 0.3s ease;
+@keyframes like-burst {
+    0% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(239, 68, 68, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+    }
+}
+
+.action-btn.liked,
+.fab.active#fabLike {
+    animation: like-pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    color: #EF4444 !important;
+    border-color: #EF4444 !important;
+    background-color: rgba(239, 68, 68, 0.1);
+}
+
+/* Burst effect on click */
+.action-btn.liked:active,
+.fab.active#fabLike:active {
+    animation: like-burst 0.4s ease-out;
 }
 
 /* ===== Bottom Navigation ===== */

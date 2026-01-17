@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="保存した記事やいいねした記事を確認できるライブラリページです">
+    <title>ライブラリ - Paper Insight</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages.css">
+
+    <style>
+        /* Library Specific Styles */
+        .library-header {
+            padding: var(--spacing-8) 0 var(--spacing-4);
+            margin-bottom: var(--spacing-4);
+            text-align: center;
+        }
+
+        .library-title {
+            font-size: var(--font-size-2xl);
+            margin-bottom: var(--spacing-6);
+        }
+
+        /* Segmented Control for Tabs */
+        .library-tabs {
+            display: inline-flex;
+            background: var(--color-bg-secondary);
+            padding: 4px;
+            border-radius: var(--radius-full);
+            margin-bottom: var(--spacing-6);
+            position: relative;
+            border: 1px solid var(--color-border);
+        }
+
+        .library-tab {
+            padding: var(--spacing-2) var(--spacing-6);
+            border-radius: var(--radius-full);
+            font-weight: var(--font-weight-medium);
+            color: var(--color-text-secondary);
+            transition: all var(--transition-base);
+            position: relative;
+            z-index: 2;
+        }
+
+        .library-tab:hover {
+            color: var(--color-text-primary);
+        }
+
+        .library-tab.active {
+            background: var(--color-bg-card);
+            color: var(--color-primary);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Empty State for Library */
+        .library-empty {
+            padding: var(--spacing-12) var(--spacing-4);
+            text-align: center;
+            display: none;
+        }
+
+        .library-empty--visible {
+            display: block;
+        }
+
+        .library-empty__icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-4);
+            opacity: 0.5;
+        }
+
+        .library-empty__text {
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-6);
+        }
+
+        .btn-explore {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            padding: var(--spacing-3) var(--spacing-6);
+            background: var(--color-primary);
+            color: white;
+            border-radius: var(--radius-full);
+            font-weight: var(--font-weight-medium);
+            transition: background-color var(--transition-fast);
+        }
+
+        .btn-explore:hover {
+            background: var(--color-primary-dark);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="navbar__logo">
+            <span class="navbar__logo-icon">📄</span>
+            <span>Paper Insight</span>
+        </a>
+        <div class="navbar__actions">
+            <button class="navbar__btn theme-toggle" id="themeToggle" aria-label="テーマ切り替え">
+                <span class="theme-toggle__icon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="container" style="padding-top: var(--nav-height); padding-bottom: 100px;">
+        <!-- Header & Tabs -->
+        <header class="library-header">
+            <h1 class="library-title">マイライブラリ</h1>
+
+            <div class="library-tabs" role="tablist">
+                <button class="library-tab active" data-tab="bookmarks" role="tab" aria-selected="true">
+                    📑 あとで読む
+                </button>
+                <button class="library-tab" data-tab="likes" role="tab" aria-selected="false">
+                    ❤️ いいね履歴
+                </button>
+            </div>
+        </header>
+
+        <!-- Articles Grid -->
+        <div class="cards-grid" id="libraryGrid">
+            <!-- Populated by JS -->
+        </div>
+
+        <!-- Empty State -->
+        <div class="library-empty" id="emptyState">
+            <div class="library-empty__icon">📚</div>
+            <p class="library-empty__text">まだ保存された記事はありません</p>
+            <a href="index.html" class="btn-explore">記事を探す</a>
+        </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="bottom-nav__item">
+            <span class="bottom-nav__icon">🏠</span>
+            <span class="bottom-nav__label">ホーム</span>
+        </a>
+        <a href="index.html#search" class="bottom-nav__item" id="navSearch">
+            <span class="bottom-nav__icon">🔍</span>
+            <span class="bottom-nav__label">検索</span>
+        </a>
+        <a href="library.html" class="bottom-nav__item active" id="navLibrary">
+            <span class="bottom-nav__icon">📚</span>
+            <span class="bottom-nav__label">ライブラリ</span>
+        </a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/filters.js"></script>
+    <script>
+        // Library Logic
+        const LibraryApp = {
+            currentTab: 'bookmarks',
+            bookmarks: new Set(),
+            likes: new Set(),
+
+            async init() {
+                // Load data & preferences
+                await DataManager.init();
+                this.loadPreferences();
+                this.initTheme();
+
+                // Initial render
+                this.renderArticles();
+
+                // Event listeners
+                this.setupEventListeners();
+            },
+
+            loadPreferences() {
+                try {
+                    const bookmarks = localStorage.getItem('paperinsight_bookmarks');
+                    const likes = localStorage.getItem('paperinsight_likes');
+                    if (bookmarks) this.bookmarks = new Set(JSON.parse(bookmarks));
+                    if (likes) this.likes = new Set(JSON.parse(likes));
+                } catch (e) { console.error(e); }
+            },
+
+            initTheme() {
+                const savedTheme = localStorage.getItem('paperinsight_theme');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (savedTheme) {
+                    document.documentElement.setAttribute('data-theme', savedTheme);
+                } else if (prefersDark) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
+                this.updateThemeIcon();
+            },
+
+            updateThemeIcon() {
+                const icon = document.querySelector('.theme-toggle__icon');
+                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                if (icon) icon.textContent = isDark ? '☀️' : '🌙';
+            },
+
+            toggleTheme() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('paperinsight_theme', newTheme);
+                this.updateThemeIcon();
+            },
+
+            renderArticles() {
+                const grid = document.getElementById('libraryGrid');
+                const emptyState = document.getElementById('emptyState');
+                const emptyText = emptyState.querySelector('.library-empty__text');
+
+                grid.innerHTML = '';
+
+                // Get target IDs based on tab
+                const targetIds = this.currentTab === 'bookmarks' ? this.bookmarks : this.likes;
+
+                // Filter valid articles
+                const articles = Array.from(targetIds)
+                    .map(id => DataManager.getArticleById(id))
+                    .filter(Boolean); // Remote nulls if article deleted
+
+                // Show/hide empty state
+                if (articles.length === 0) {
+                    grid.style.display = 'none';
+                    emptyState.classList.add('library-empty--visible');
+                    emptyText.textContent = this.currentTab === 'bookmarks'
+                        ? 'まだ保存された記事はありません'
+                        : 'まだいいねした記事はありません';
+                    return;
+                }
+
+                grid.style.display = 'grid';
+                emptyState.classList.remove('library-empty--visible');
+
+                // Render cards
+                articles.forEach(article => {
+                    const card = Components.createArticleCard(article);
+
+                    // Set button states
+                    const bookmarkBtn = card.querySelector('.bookmark-btn');
+                    const likeBtn = card.querySelector('.like-btn');
+
+                    if (bookmarkBtn && this.bookmarks.has(article.id)) {
+                        bookmarkBtn.classList.add('active');
+                        bookmarkBtn.textContent = '📑';
+                    }
+                    if (likeBtn && this.likes.has(article.id)) {
+                        likeBtn.classList.add('active');
+                        likeBtn.textContent = '❤️';
+                    }
+
+                    grid.appendChild(card);
+                });
+            },
+
+            removeBookmark(id) {
+                this.bookmarks.delete(id);
+                localStorage.setItem('paperinsight_bookmarks', JSON.stringify([...this.bookmarks]));
+                this.renderArticles(); // Re-render to remove from list immediately
+                Components.showToast('保存済みから削除しました');
+            },
+
+            toggleLike(id, btn) {
+                if (this.likes.has(id)) {
+                    this.likes.delete(id);
+                    btn.classList.remove('active');
+                    btn.textContent = '🤍';
+                } else {
+                    this.likes.add(id);
+                    btn.classList.add('active');
+                    btn.textContent = '❤️';
+                    Components.showToast('いいねしました！');
+                }
+                localStorage.setItem('paperinsight_likes', JSON.stringify([...this.likes]));
+                // Note: For likes, we might want to keep showing it until refresh or tab switch?
+                // For now, let's re-render if we are in 'likes' tab to remove it immediately
+                if (this.currentTab === 'likes') {
+                    this.renderArticles();
+                }
+            },
+
+            setupEventListeners() {
+                // Theme Toggle
+                document.getElementById('themeToggle').addEventListener('click', () => this.toggleTheme());
+
+                // Tabs
+                document.querySelectorAll('.library-tab').forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        // Update UI
+                        document.querySelectorAll('.library-tab').forEach(t => t.classList.remove('active'));
+                        tab.classList.add('active');
+
+                        // Switch tab logic
+                        this.currentTab = tab.dataset.tab;
+                        this.renderArticles();
+                    });
+                });
+
+                // Card Actions (Delegation)
+                document.getElementById('libraryGrid').addEventListener('click', (e) => {
+                    const bookmarkBtn = e.target.closest('.bookmark-btn');
+                    const likeBtn = e.target.closest('.like-btn');
+
+                    if (bookmarkBtn) {
+                        e.stopPropagation();
+                        // In library, clicking bookmark usually means removing it
+                        this.removeBookmark(bookmarkBtn.dataset.id);
+                    }
+
+                    if (likeBtn) {
+                        e.stopPropagation();
+                        this.toggleLike(likeBtn.dataset.id, likeBtn);
+                    }
+                });
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            LibraryApp.init();
+        });
+    </script>
+</body>
+
+</html>
