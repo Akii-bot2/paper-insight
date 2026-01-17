@@ -111,15 +111,17 @@
     box-shadow: var(--shadow-sm);
     transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
     cursor: pointer;
+    border: 1px solid var(--color-border);
 }
 
 .article-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-card-hover), 0 0 30px rgba(13, 148, 136, 0.15);
+    border-color: var(--color-primary);
 }
 
 .article-card__thumbnail {
-    height: 140px;
+    height: 160px;
     position: relative;
     display: flex;
     align-items: center;
@@ -127,10 +129,43 @@
     overflow: hidden;
 }
 
+/* Overlay for better text readability on images */
+.article-card__thumbnail::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 30%, rgba(0, 0, 0, 0.4) 100%);
+    z-index: 1;
+}
+
+/* Subtle animated glow effect for scientific feel */
+.article-card__thumbnail::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, rgba(13, 148, 136, 0.1) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity var(--transition-smooth);
+}
+
+.article-card:hover .article-card__thumbnail::after {
+    opacity: 1;
+}
+
 .article-card__thumbnail-icon {
     font-size: 3rem;
-    opacity: 0.8;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    opacity: 0.9;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    z-index: 2;
+    transition: transform var(--transition-smooth);
+}
+
+.article-card:hover .article-card__thumbnail-icon {
+    transform: scale(1.1);
 }
 
 .article-card__body {

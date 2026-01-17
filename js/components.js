@@ -4,25 +4,26 @@
  */
 
 const Components = {
-    /**
-     * Create an article card element
-     */
-    createArticleCard(article) {
-        const card = document.createElement('article');
-        card.className = 'article-card';
-        card.dataset.articleId = article.id;
+  /**
+   * Create an article card element
+   */
+  createArticleCard(article) {
+    const card = document.createElement('article');
+    card.className = 'article-card';
+    card.dataset.articleId = article.id;
 
-        // Determine gradient class based on thumbnail data
-        const gradientClass = this.getGradientClass(article.thumbnail);
+    // Determine thumbnail style based on type (image or gradient)
+    const thumbnailStyle = this.getThumbnailStyle(article.thumbnail);
+    const gradientClass = this.getGradientClass(article.thumbnail);
 
-        // Check if AI related for special styling
-        const isAI = DataManager.isAIRelated(article);
+    // Check if AI related for special styling
+    const isAI = DataManager.isAIRelated(article);
 
-        // Format reading time
-        const readingTimeText = this.formatReadingTime(article.readingTime);
+    // Format reading time
+    const readingTimeText = this.formatReadingTime(article.readingTime);
 
-        card.innerHTML = `
-      <div class="article-card__thumbnail ${gradientClass}">
+    card.innerHTML = `
+      <div class="article-card__thumbnail ${gradientClass}" style="${thumbnailStyle}">
         <span class="article-card__thumbnail-icon">${this.getCategoryIcon(article)}</span>
       </div>
       <div class="article-card__body">
@@ -46,117 +47,129 @@ const Components = {
       </div>
     `;
 
-        // Add click handler for navigation
-        card.addEventListener('click', (e) => {
-            if (!e.target.closest('.action-btn')) {
-                window.location.href = `article.html?id=${article.id}`;
-            }
-        });
+    // Add click handler for navigation
+    card.addEventListener('click', (e) => {
+      if (!e.target.closest('.action-btn')) {
+        window.location.href = `article.html?id=${article.id}`;
+      }
+    });
 
-        return card;
-    },
+    return card;
+  },
 
-    /**
-     * Get gradient class based on thumbnail colors
-     */
-    getGradientClass(thumbnail) {
-        if (!thumbnail || !thumbnail.colors) {
-            return 'gradient-teal-cyan';
-        }
+  /**
+   * Get thumbnail style based on thumbnail data
+   */
+  getThumbnailStyle(thumbnail) {
+    if (!thumbnail) return '';
 
-        const colorMap = {
-            '#667eea': 'gradient-purple-blue',
-            '#0D9488': 'gradient-teal-cyan',
-            '#F59E0B': 'gradient-orange-pink',
-            '#3B82F6': 'gradient-blue-indigo',
-            '#10B981': 'gradient-green-teal',
-            '#8B5CF6': 'gradient-purple-blue',
-            '#22C55E': 'gradient-green-teal',
-            '#EF4444': 'gradient-rose-purple'
-        };
+    if (thumbnail.type === 'image' && thumbnail.url) {
+      return `background-image: url('${thumbnail.url}'); background-size: cover; background-position: center;`;
+    }
+    return '';
+  },
 
-        return colorMap[thumbnail.colors[0]] || 'gradient-teal-cyan';
-    },
+  /**
+   * Get gradient class based on thumbnail colors
+   */
+  getGradientClass(thumbnail) {
+    if (!thumbnail || !thumbnail.colors) {
+      return 'gradient-teal-cyan';
+    }
 
-    /**
-     * Get appropriate icon for article based on categories
-     */
-    getCategoryIcon(article) {
-        const categoryIcons = {
-            'nature-science': '🌌',
-            'ai-technology': '🤖',
-            'human-mind': '🧠',
-            'society-business': '📊',
-            'health-medical': '🏥'
-        };
+    const colorMap = {
+      '#667eea': 'gradient-purple-blue',
+      '#0D9488': 'gradient-teal-cyan',
+      '#F59E0B': 'gradient-orange-pink',
+      '#3B82F6': 'gradient-blue-indigo',
+      '#10B981': 'gradient-green-teal',
+      '#8B5CF6': 'gradient-purple-blue',
+      '#22C55E': 'gradient-green-teal',
+      '#EF4444': 'gradient-rose-purple'
+    };
 
-        const primaryCategory = article.categories.standard[0];
-        return categoryIcons[primaryCategory] || '📄';
-    },
+    return colorMap[thumbnail.colors[0]] || 'gradient-teal-cyan';
+  },
 
-    /**
-     * Format reading time for display
-     */
-    formatReadingTime(seconds) {
-        if (seconds < 60) {
-            return `${seconds}秒で読める`;
-        }
-        const minutes = Math.round(seconds / 60);
-        return `${minutes}分で読める`;
-    },
+  /**
+   * Get appropriate icon for article based on categories
+   */
+  getCategoryIcon(article) {
+    const categoryIcons = {
+      'nature-science': '🌌',
+      'ai-technology': '🤖',
+      'human-mind': '🧠',
+      'society-business': '📊',
+      'health-medical': '🏥'
+    };
 
-    /**
-     * Create HTML for tags
-     */
-    createTagsHTML(tags, highlightAI = false) {
-        return tags.map(tag => {
-            const isAITag = tag.toLowerCase().includes('ai') ||
-                tag.toLowerCase().includes('chatgpt') ||
-                tag.toLowerCase().includes('llm');
-            const tagClass = (highlightAI && isAITag) ? 'tag tag--ai' : 'tag';
-            return `<span class="${tagClass}">${this.escapeHTML(tag)}</span>`;
-        }).join('');
-    },
+    const primaryCategory = article.categories.standard[0];
+    return categoryIcons[primaryCategory] || '📄';
+  },
 
-    /**
-     * Create category tab element
-     */
-    createCategoryTab(category, isActive = false) {
-        const tab = document.createElement('button');
-        tab.className = `category-tabs__item${isActive ? ' active' : ''}`;
+  /**
+   * Format reading time for display
+   */
+  formatReadingTime(seconds) {
+    if (seconds < 60) {
+      return `${seconds}秒で読める`;
+    }
+    const minutes = Math.round(seconds / 60);
+    return `${minutes}分で読める`;
+  },
 
-        // Add special class for AI category
-        if (category.id === 'ai-technology' || category.id === 'applied-ai') {
-            tab.classList.add('category-tabs__item--ai');
-        }
+  /**
+   * Create HTML for tags
+   */
+  createTagsHTML(tags, highlightAI = false) {
+    return tags.map(tag => {
+      const isAITag = tag.toLowerCase().includes('ai') ||
+        tag.toLowerCase().includes('chatgpt') ||
+        tag.toLowerCase().includes('llm');
+      const tagClass = (highlightAI && isAITag) ? 'tag tag--ai' : 'tag';
+      return `<span class="${tagClass}">${this.escapeHTML(tag)}</span>`;
+    }).join('');
+  },
 
-        tab.dataset.categoryId = category.id;
-        tab.setAttribute('role', 'tab');
-        tab.setAttribute('aria-selected', isActive);
-        tab.textContent = `${category.icon} ${category.name}`;
+  /**
+   * Create category tab element
+   */
+  createCategoryTab(category, isActive = false) {
+    const tab = document.createElement('button');
+    tab.className = `category-tabs__item${isActive ? ' active' : ''}`;
 
-        return tab;
-    },
+    // Add special class for AI category
+    if (category.id === 'ai-technology' || category.id === 'applied-ai') {
+      tab.classList.add('category-tabs__item--ai');
+    }
 
-    /**
-     * Create mood filter pill element
-     */
-    createMoodPill(mood, isActive = false) {
-        const pill = document.createElement('button');
-        pill.className = `mood-pill${isActive ? ' active' : ''}`;
-        pill.dataset.moodId = mood.id;
-        pill.innerHTML = `<span>${mood.icon}</span> ${mood.name}`;
+    tab.dataset.categoryId = category.id;
+    tab.setAttribute('role', 'tab');
+    tab.setAttribute('aria-selected', isActive);
+    tab.textContent = `${category.icon} ${category.name}`;
 
-        return pill;
-    },
+    return tab;
+  },
 
-    /**
-     * Create loading skeleton cards
-     */
-    createSkeletonCard() {
-        const skeleton = document.createElement('div');
-        skeleton.className = 'article-card';
-        skeleton.innerHTML = `
+  /**
+   * Create mood filter pill element
+   */
+  createMoodPill(mood, isActive = false) {
+    const pill = document.createElement('button');
+    pill.className = `mood-pill${isActive ? ' active' : ''}`;
+    pill.dataset.moodId = mood.id;
+    pill.innerHTML = `<span>${mood.icon}</span> ${mood.name}`;
+
+    return pill;
+  },
+
+  /**
+   * Create loading skeleton cards
+   */
+  createSkeletonCard() {
+    const skeleton = document.createElement('div');
+    skeleton.className = 'article-card';
+    skeleton.innerHTML = `
       <div class="article-card__thumbnail skeleton" style="height: 140px;"></div>
       <div class="article-card__body">
         <div class="article-card__meta">
@@ -168,33 +181,33 @@ const Components = {
         <div class="skeleton" style="width: 100%; height: 40px;"></div>
       </div>
     `;
-        return skeleton;
-    },
+    return skeleton;
+  },
 
-    /**
-     * Show toast notification
-     */
-    showToast(message, duration = 2000) {
-        const toast = document.getElementById('toast');
-        if (!toast) return;
+  /**
+   * Show toast notification
+   */
+  showToast(message, duration = 2000) {
+    const toast = document.getElementById('toast');
+    if (!toast) return;
 
-        toast.textContent = message;
-        toast.classList.add('show');
+    toast.textContent = message;
+    toast.classList.add('show');
 
-        setTimeout(() => {
-            toast.classList.remove('show');
-        }, duration);
-    },
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, duration);
+  },
 
-    /**
-     * Escape HTML to prevent XSS
-     */
-    escapeHTML(str) {
-        if (!str) return '';
-        const div = document.createElement('div');
-        div.textContent = str;
-        return div.innerHTML;
-    }
+  /**
+   * Escape HTML to prevent XSS
+   */
+  escapeHTML(str) {
+    if (!str) return '';
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
 };
 
 // Export for use in other modules

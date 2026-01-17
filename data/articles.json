@@ -28,7 +28,8 @@
         "使い方"
       ],
       "thumbnail": {
-        "type": "gradient",
+        "type": "image",
+        "url": "images/sample_article.png",
         "colors": [
           "#0D9488",
           "#06B6D4"
@@ -76,7 +77,8 @@
         "機械学習"
       ],
       "thumbnail": {
-        "type": "gradient",
+        "type": "image",
+        "url": "images/stress_productivity.png",
         "colors": [
           "#8B5CF6",
           "#EC4899"
