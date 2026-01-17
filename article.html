@@ -428,6 +428,20 @@
                 </a>
             </section>
 
+            <!-- AdSense Placeholder (Article Bottom) -->
+            <div class="ad-placeholder" id="adArticleBottom">
+                <span class="ad-label">Sponsored</span>
+                <div class="ad-content">ここに広告が表示されます</div>
+            </div>
+
+            <!-- Recommended Books (Affiliate) -->
+            <section class="related-section" id="recommendedBooks" style="display: none;">
+                <h2 class="related-section__title">📚 もっと詳しく知りたい方へ</h2>
+                <div class="book-list" id="bookList">
+                    <!-- Populated by JS -->
+                </div>
+            </section>
+
             <!-- Related Articles -->
             <section class="related-section" id="relatedSection" style="display: none;">
                 <h2 class="related-section__title">🔗 関連する記事</h2>
@@ -612,6 +626,24 @@
                 const doiLink = document.getElementById('paperDoi');
                 doiLink.textContent = `DOI: ${art.metadata.doi}`;
                 doiLink.href = `https://doi.org/${art.metadata.doi}`;
+
+                // Affiliate Products (Recommended Books)
+                const booksSection = document.getElementById('recommendedBooks');
+                const bookList = document.getElementById('bookList');
+
+                if (art.affiliate_products && art.affiliate_products.length > 0) {
+                    booksSection.style.display = 'block';
+                    bookList.innerHTML = art.affiliate_products.map(book => `
+                        <a href="${book.url}" target="_blank" rel="noopener sponsored" class="book-card">
+                            <div class="book-card__thumb" style="background-image: url('${book.image}')"></div>
+                            <div class="book-card__content">
+                                <h3 class="book-card__title">${book.title}</h3>
+                                <p class="book-card__desc">${book.description}</p>
+                                <span class="book-card__provider">Amazonで見る ↗</span>
+                            </div>
+                        </a>
+                    `).join('');
+                }
 
                 // Related articles
                 const relatedArticles = DataManager.getRelatedArticles(art.id);

@@ -93,6 +93,22 @@
         "practical",
         "thought-provoking"
       ],
+      "affiliate_products": [
+        {
+          "title": "ストレスフリー超大全",
+          "description": "科学的なファクトに基づき、ストレスをゼロにする具体的な方法を網羅。",
+          "url": "https://www.amazon.co.jp/dp/B08CZ55T7M",
+          "image": "https://m.media-amazon.com/images/I/41-y7-sK3JL._SL500_.jpg",
+          "provider": "Amazon"
+        },
+        {
+          "title": "スタンフォードのストレスを力に変える教科書",
+          "description": "ストレスは「害」ではない。考え方次第で味方になることを科学的に解説。",
+          "url": "https://www.amazon.co.jp/dp/B01LYZOT0G",
+          "image": "https://m.media-amazon.com/images/I/51w+S6y+J+L._SL500_.jpg",
+          "provider": "Amazon"
+        }
+      ],
       "relatedArticles": []
     }
   ],
