@@ -15,21 +15,41 @@
       },
       "readingTime": 45,
       "categories": {
-        "standard": ["ai-technology", "human-mind"],
-        "thematic": ["thinking-models", "life-hacks"]
+        "standard": [
+          "ai-technology",
+          "human-mind"
+        ],
+        "thematic": [
+          "thinking-models",
+          "life-hacks"
+        ]
       },
-      "tags": ["AI", "認知科学", "生産性", "脳"],
+      "tags": [
+        "AI",
+        "認知科学",
+        "生産性",
+        "脳"
+      ],
       "thumbnail": {
         "type": "gradient",
-        "colors": ["#667eea", "#764ba2"]
+        "colors": [
+          "#667eea",
+          "#764ba2"
+        ]
       },
       "metadata": {
         "source": "Nature Human Behaviour",
         "publishedDate": "2026-01-10",
         "doi": "10.1038/s41562-026-0123"
       },
-      "mood": ["thought-provoking", "practical"],
-      "relatedArticles": ["art-002", "art-005"]
+      "mood": [
+        "thought-provoking",
+        "practical"
+      ],
+      "relatedArticles": [
+        "art-002",
+        "art-005"
+      ]
     },
     {
       "id": "art-002",
@@ -46,21 +66,40 @@
       },
       "readingTime": 60,
       "categories": {
-        "standard": ["human-mind"],
-        "thematic": ["life-hacks", "thinking-models"]
+        "standard": [
+          "human-mind"
+        ],
+        "thematic": [
+          "life-hacks",
+          "thinking-models"
+        ]
       },
-      "tags": ["睡眠", "創造性", "脳科学", "ライフハック"],
+      "tags": [
+        "睡眠",
+        "創造性",
+        "脳科学",
+        "ライフハック"
+      ],
       "thumbnail": {
         "type": "gradient",
-        "colors": ["#0D9488", "#06B6D4"]
+        "colors": [
+          "#0D9488",
+          "#06B6D4"
+        ]
       },
       "metadata": {
         "source": "Science",
         "publishedDate": "2026-01-08",
         "doi": "10.1126/science.abc1234"
       },
-      "mood": ["inspiring", "practical"],
-      "relatedArticles": ["art-001", "art-003"]
+      "mood": [
+        "inspiring",
+        "practical"
+      ],
+      "relatedArticles": [
+        "art-001",
+        "art-003"
+      ]
     },
     {
       "id": "art-003",
@@ -77,21 +116,39 @@
       },
       "readingTime": 50,
       "categories": {
-        "standard": ["health-medical", "human-mind"],
-        "thematic": ["life-hacks"]
+        "standard": [
+          "health-medical",
+          "human-mind"
+        ],
+        "thematic": [
+          "life-hacks"
+        ]
       },
-      "tags": ["腸内細菌", "メンタルヘルス", "不安", "発酵食品"],
+      "tags": [
+        "腸内細菌",
+        "メンタルヘルス",
+        "不安",
+        "発酵食品"
+      ],
       "thumbnail": {
         "type": "gradient",
-        "colors": ["#10B981", "#14B8A6"]
+        "colors": [
+          "#10B981",
+          "#14B8A6"
+        ]
       },
       "metadata": {
         "source": "Cell",
         "publishedDate": "2026-01-05",
         "doi": "10.1016/j.cell.2026.01.002"
       },
-      "mood": ["practical", "motivating"],
-      "relatedArticles": ["art-004"]
+      "mood": [
+        "practical",
+        "motivating"
+      ],
+      "relatedArticles": [
+        "art-004"
+      ]
     },
     {
       "id": "art-004",
@@ -108,21 +165,39 @@
       },
       "readingTime": 40,
       "categories": {
-        "standard": ["ai-technology"],
-        "thematic": ["applied-ai"]
+        "standard": [
+          "ai-technology"
+        ],
+        "thematic": [
+          "applied-ai"
+        ]
       },
-      "tags": ["AI", "LLM", "ChatGPT", "学術研究"],
+      "tags": [
+        "AI",
+        "LLM",
+        "ChatGPT",
+        "学術研究"
+      ],
       "thumbnail": {
         "type": "gradient",
-        "colors": ["#8B5CF6", "#6366F1"]
+        "colors": [
+          "#8B5CF6",
+          "#6366F1"
+        ]
       },
       "metadata": {
         "source": "Nature",
         "publishedDate": "2026-01-12",
         "doi": "10.1038/d41586-026-0789"
       },
-      "mood": ["thought-provoking", "practical"],
-      "relatedArticles": ["art-001", "art-005"]
+      "mood": [
+        "thought-provoking",
+        "practical"
+      ],
+      "relatedArticles": [
+        "art-001",
+        "art-005"
+      ]
     },
     {
       "id": "art-005",
@@ -139,21 +214,40 @@
       },
       "readingTime": 55,
       "categories": {
-        "standard": ["society-business", "ai-technology"],
-        "thematic": ["future-trends", "applied-ai"]
+        "standard": [
+          "society-business",
+          "ai-technology"
+        ],
+        "thematic": [
+          "future-trends",
+          "applied-ai"
+        ]
       },
-      "tags": ["AI", "経済", "投資", "予測", "リスク管理"],
+      "tags": [
+        "AI",
+        "経済",
+        "投資",
+        "予測",
+        "リスク管理"
+      ],
       "thumbnail": {
         "type": "gradient",
-        "colors": ["#3B82F6", "#6366F1"]
+        "colors": [
+          "#3B82F6",
+          "#6366F1"
+        ]
       },
       "metadata": {
         "source": "Journal of Economic Perspectives",
         "publishedDate": "2026-01-14",
         "doi": "10.1257/jep.2026.1.045"
       },
-      "mood": ["thought-provoking"],
-      "relatedArticles": ["art-004"]
+      "mood": [
+        "thought-provoking"
+      ],
+      "relatedArticles": [
+        "art-004"
+      ]
     },
     {
       "id": "art-006",
@@ -170,20 +264,35 @@
       },
       "readingTime": 65,
       "categories": {
-        "standard": ["nature-science"],
-        "thematic": ["future-trends", "sustainability"]
+        "standard": [
+          "nature-science"
+        ],
+        "thematic": [
+          "future-trends",
+          "sustainability"
+        ]
       },
-      "tags": ["量子力学", "光合成", "エネルギー", "科学"],
+      "tags": [
+        "量子力学",
+        "光合成",
+        "エネルギー",
+        "科学"
+      ],
       "thumbnail": {
         "type": "gradient",
-        "colors": ["#22C55E", "#10B981"]
+        "colors": [
+          "#22C55E",
+          "#10B981"
+        ]
       },
       "metadata": {
         "source": "Physical Review Letters",
         "publishedDate": "2026-01-11",
         "doi": "10.1103/PhysRevLett.126.148302"
       },
-      "mood": ["inspiring"],
+      "mood": [
+        "inspiring"
+      ],
       "relatedArticles": []
     },
     {
@@ -201,21 +310,40 @@
       },
       "readingTime": 35,
       "categories": {
-        "standard": ["human-mind"],
-        "thematic": ["life-hacks", "thinking-models"]
+        "standard": [
+          "human-mind"
+        ],
+        "thematic": [
+          "life-hacks",
+          "thinking-models"
+        ]
       },
-      "tags": ["デジタルミニマリズム", "集中力", "スマホ", "生産性"],
+      "tags": [
+        "デジタルミニマリズム",
+        "集中力",
+        "スマホ",
+        "生産性"
+      ],
       "thumbnail": {
         "type": "gradient",
-        "colors": ["#F59E0B", "#EC4899"]
+        "colors": [
+          "#F59E0B",
+          "#EC4899"
+        ]
       },
       "metadata": {
         "source": "PNAS",
         "publishedDate": "2026-01-09",
         "doi": "10.1073/pnas.2025123456"
       },
-      "mood": ["motivating", "practical"],
-      "relatedArticles": ["art-001", "art-002"]
+      "mood": [
+        "motivating",
+        "practical"
+      ],
+      "relatedArticles": [
+        "art-001",
+        "art-002"
+      ]
     },
     {
       "id": "art-008",
@@ -232,43 +360,180 @@
       },
       "readingTime": 50,
       "categories": {
-        "standard": ["health-medical", "ai-technology"],
-        "thematic": ["applied-ai"]
+        "standard": [
+          "health-medical",
+          "ai-technology"
+        ],
+        "thematic": [
+          "applied-ai"
+        ]
       },
-      "tags": ["AI", "認知症", "医療", "早期発見", "日本"],
+      "tags": [
+        "AI",
+        "認知症",
+        "医療",
+        "早期発見",
+        "日本"
+      ],
       "thumbnail": {
         "type": "gradient",
-        "colors": ["#EF4444", "#F59E0B"]
+        "colors": [
+          "#EF4444",
+          "#F59E0B"
+        ]
       },
       "metadata": {
         "source": "Lancet Digital Health",
         "publishedDate": "2026-01-15",
         "doi": "10.1016/S2589-7500(26)00012-3"
       },
-      "mood": ["inspiring", "practical"],
-      "relatedArticles": ["art-003", "art-004"]
+      "mood": [
+        "inspiring",
+        "practical"
+      ],
+      "relatedArticles": [
+        "art-003",
+        "art-004"
+      ]
+    },
+    {
+      "id": "art-009",
+      "originalTitle": "Task Switching Costs and Cognitive Performance: A Comprehensive Meta-Analysis",
+      "catchyTitle": "マルチタスクは本当に効率が悪いのか？科学が出した意外な結論",
+      "summary": {
+        "oneLine": "マルチタスクの「効率低下」は最大40%だが、ある条件下では逆効果にならない",
+        "threePoints": [
+          "タスク切り替えのたびに脳は「再起動コスト」を払い、集中力回復に平均23分かかる",
+          "ただし「似た種類のタスク」間の切り替えはコストが80%減少",
+          "音楽を聴きながらの作業は例外的にパフォーマンスが向上するケースも"
+        ],
+        "fullSummary": "ミシガン大学の研究チームが過去20年間の認知科学研究500件以上をメタ分析した結果、マルチタスクの真実が明らかになりました。異なる種類のタスク（例：メール返信と企画書作成）を切り替えると、脳は「認知的再構成」を必要とし、集中力が完全に回復するまで平均23分かかることが判明。一方、同じカテゴリのタスク（例：複数のメール返信）間では切り替えコストが80%減少。さらに興味深いことに、歌詞のない音楽を聴きながらの単純作業では、むしろパフォーマンスが15%向上するという結果も。研究者は「すべてのマルチタスクが悪いわけではない」と結論づけ、効率的なタスク管理のための具体的な指針を提案しています。"
+      },
+      "readingTime": 40,
+      "categories": {
+        "standard": [
+          "human-mind"
+        ],
+        "thematic": [
+          "life-hacks",
+          "thinking-models"
+        ]
+      },
+      "tags": [
+        "生産性",
+        "集中力",
+        "マルチタスク",
+        "脳科学",
+        "仕事術"
+      ],
+      "thumbnail": {
+        "type": "gradient",
+        "colors": [
+          "#6366F1",
+          "#8B5CF6"
+        ]
+      },
+      "metadata": {
+        "source": "Psychological Bulletin",
+        "publishedDate": "2026-01-17",
+        "doi": "10.1037/bul0000412"
+      },
+      "mood": [
+        "practical",
+        "thought-provoking"
+      ],
+      "relatedArticles": [
+        "art-001",
+        "art-007"
+      ]
     }
   ],
   "categories": {
     "standard": [
-      { "id": "nature-science", "name": "自然科学", "nameEn": "Nature & Universe", "icon": "🌌" },
-      { "id": "ai-technology", "name": "AI・テクノロジー", "nameEn": "AI & Technology", "icon": "🤖" },
-      { "id": "human-mind", "name": "人間科学・心理", "nameEn": "Human & Mind", "icon": "🧠" },
-      { "id": "society-business", "name": "社会科学・ビジネス", "nameEn": "Society & Business", "icon": "📊" },
-      { "id": "health-medical", "name": "医歯薬学・ヘルスケア", "nameEn": "Health & Medical", "icon": "🏥" }
+      {
+        "id": "nature-science",
+        "name": "自然科学",
+        "nameEn": "Nature & Universe",
+        "icon": "🌌"
+      },
+      {
+        "id": "ai-technology",
+        "name": "AI・テクノロジー",
+        "nameEn": "AI & Technology",
+        "icon": "🤖"
+      },
+      {
+        "id": "human-mind",
+        "name": "人間科学・心理",
+        "nameEn": "Human & Mind",
+        "icon": "🧠"
+      },
+      {
+        "id": "society-business",
+        "name": "社会科学・ビジネス",
+        "nameEn": "Society & Business",
+        "icon": "📊"
+      },
+      {
+        "id": "health-medical",
+        "name": "医歯薬学・ヘルスケア",
+        "nameEn": "Health & Medical",
+        "icon": "🏥"
+      }
     ],
     "thematic": [
-      { "id": "life-hacks", "name": "ライフハック・自己改善", "nameEn": "Life Hacks", "icon": "✨" },
-      { "id": "applied-ai", "name": "AI × 〇〇", "nameEn": "Applied AI", "icon": "🔮" },
-      { "id": "future-trends", "name": "未来予測", "nameEn": "Future Trends", "icon": "🚀" },
-      { "id": "thinking-models", "name": "思考法・メンタルモデル", "nameEn": "Thinking Models", "icon": "💡" },
-      { "id": "sustainability", "name": "サステナビリティ", "nameEn": "Sustainability", "icon": "🌱" }
+      {
+        "id": "life-hacks",
+        "name": "ライフハック・自己改善",
+        "nameEn": "Life Hacks",
+        "icon": "✨"
+      },
+      {
+        "id": "applied-ai",
+        "name": "AI × 〇〇",
+        "nameEn": "Applied AI",
+        "icon": "🔮"
+      },
+      {
+        "id": "future-trends",
+        "name": "未来予測",
+        "nameEn": "Future Trends",
+        "icon": "🚀"
+      },
+      {
+        "id": "thinking-models",
+        "name": "思考法・メンタルモデル",
+        "nameEn": "Thinking Models",
+        "icon": "💡"
+      },
+      {
+        "id": "sustainability",
+        "name": "サステナビリティ",
+        "nameEn": "Sustainability",
+        "icon": "🌱"
+      }
     ]
   },
   "moods": [
-    { "id": "motivating", "name": "元気が欲しい", "icon": "💪" },
-    { "id": "practical", "name": "すぐ使える知識", "icon": "🛠️" },
-    { "id": "thought-provoking", "name": "じっくり考えたい", "icon": "🤔" },
-    { "id": "inspiring", "name": "ワクワクしたい", "icon": "✨" }
+    {
+      "id": "motivating",
+      "name": "元気が欲しい",
+      "icon": "💪"
+    },
+    {
+      "id": "practical",
+      "name": "すぐ使える知識",
+      "icon": "🛠️"
+    },
+    {
+      "id": "thought-provoking",
+      "name": "じっくり考えたい",
+      "icon": "🤔"
+    },
+    {
+      "id": "inspiring",
+      "name": "ワクワクしたい",
+      "icon": "✨"
+    }
   ]
 }
