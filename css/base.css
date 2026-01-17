@@ -27,6 +27,52 @@ body {
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    position: relative;
+}
+
+/* Scientific background pattern */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        radial-gradient(circle at 20% 80%, rgba(13, 148, 136, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(6, 182, 212, 0.02) 0%, transparent 30%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Subtle grid pattern for scientific feel */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        linear-gradient(rgba(13, 148, 136, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(13, 148, 136, 0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: -1;
+}
+
+[data-theme="dark"] body::before {
+    background-image:
+        radial-gradient(circle at 20% 80%, rgba(45, 212, 191, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(167, 139, 250, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(94, 234, 212, 0.03) 0%, transparent 30%);
+}
+
+[data-theme="dark"] body::after {
+    background-image:
+        linear-gradient(rgba(45, 212, 191, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(45, 212, 191, 0.03) 1px, transparent 1px);
 }
 
 /* ===== Typography ===== */
