@@ -24,7 +24,6 @@ const Components = {
 
     card.innerHTML = `
       <div class="article-card__thumbnail ${gradientClass}" style="${thumbnailStyle}">
-        <span class="article-card__thumbnail-icon">${this.getCategoryIcon(article)}</span>
       </div>
       <div class="article-card__body">
         <div class="article-card__meta">
